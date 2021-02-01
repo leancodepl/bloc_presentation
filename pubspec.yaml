@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: ^6.1.1
+  meta: ^1.2.4
 
 dev_dependencies:
   flutter_test:
