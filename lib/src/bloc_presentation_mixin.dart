@@ -1,16 +1,20 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:bloc_presentation/src/bloc_presentation_event.dart';
+import 'package:flutter/foundation.dart';
 
-mixin BlocPresentation<E, S> on Cubit<S> {
-  final _presentationStream = StreamController<E>.broadcast();
+mixin BlocPresentationMixin<S> on BlocBase<S> {
+  final _presentationStream =
+      StreamController<BlocPresentationEvent>.broadcast();
 
-  Stream<E> get presentation => _presentationStream.stream;
+  Stream<BlocPresentationEvent> get presentation => _presentationStream.stream;
 
   @protected
-  void emitPresentation(E event) => _presentationStream.add(event);
+  void emitPresentation(BlocPresentationEvent event) =>
+      _presentationStream.add(event);
 
+  @override
   Future<void> close() async {
     await _presentationStream.close();
     await super.close();
