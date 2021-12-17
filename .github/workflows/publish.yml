@@ -1,0 +1,30 @@
+name: login_client_flutter publish
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+jobs:
+  publish:
+    name: Publish to pub.dev
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 2.15.1
+
+      - name: Download pub.dev credentials
+        env:
+          CREDENTIALS: ${{ secrets.PUB_DEV_CREDENTIALS }}
+        run: |
+          mkdir -p $XDG_CONFIG_HOME/dart
+          echo $CREDENTIALS > $XDG_CONFIG_HOME/dart/pub-credentials.json
+
+      - name: Publish
+        run: dart pub publish -f
