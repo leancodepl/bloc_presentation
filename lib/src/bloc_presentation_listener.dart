@@ -6,12 +6,12 @@ import 'package:nested/nested.dart';
 
 import 'bloc_presentation_mixin.dart';
 
-typedef BlocPresentationWidgetListener<S> = void Function(
+typedef BlocPresentationWidgetListener = void Function(
   BuildContext,
   BlocPresentationEvent,
 );
 
-class BlocPresentationListener<C extends BlocPresentationMixin<S>, S>
+class BlocPresentationListener<C extends BlocPresentationMixin<Object>>
     extends SingleChildStatelessWidget {
   const BlocPresentationListener({
     Key? key,
@@ -25,7 +25,7 @@ class BlocPresentationListener<C extends BlocPresentationMixin<S>, S>
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
-    return _BlocPresentationListenerImpl<C, S>(
+    return _BlocPresentationListenerImpl<C>(
       listener: listener,
       cubit: cubit,
       child: child ?? const SizedBox(),
@@ -33,7 +33,7 @@ class BlocPresentationListener<C extends BlocPresentationMixin<S>, S>
   }
 }
 
-class _BlocPresentationListenerImpl<C extends BlocPresentationMixin<S>, S>
+class _BlocPresentationListenerImpl<C extends BlocPresentationMixin<Object>>
     extends HookWidget {
   const _BlocPresentationListenerImpl({
     Key? key,
@@ -48,7 +48,7 @@ class _BlocPresentationListenerImpl<C extends BlocPresentationMixin<S>, S>
 
   @override
   Widget build(BuildContext context) {
-    useBlocPresentationListener<C, S>(
+    useBlocPresentationListener(
       listener: listener,
       cubit: cubit,
     );

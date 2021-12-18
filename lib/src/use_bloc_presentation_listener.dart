@@ -2,7 +2,7 @@ import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
 
-void useBlocPresentationListener<C extends BlocPresentationMixin<S>, S>({
+void useBlocPresentationListener<C extends BlocPresentationMixin<Object>>({
   required BlocPresentationWidgetListener listener,
   C? cubit,
 }) {

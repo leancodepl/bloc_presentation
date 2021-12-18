@@ -4,7 +4,7 @@ version: 0.0.0
 homepage: https://github.com/leancodepl/bloc_presentation
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: '>=2.15.0 <3.0.0'
 
 dependencies:
   bloc: ^8.0.1
@@ -19,3 +19,4 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   leancode_lint: ^1.0.2
+  mocktail: ^0.2.0
