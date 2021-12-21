@@ -11,46 +11,46 @@ typedef BlocPresentationWidgetListener = void Function(
   BlocPresentationEvent,
 );
 
-class BlocPresentationListener<C extends BlocPresentationMixin<Object>>
+class BlocPresentationListener<B extends BlocPresentationMixin<Object>>
     extends SingleChildStatelessWidget {
   const BlocPresentationListener({
     Key? key,
-    this.cubit,
+    this.bloc,
     required this.listener,
     Widget? child,
   }) : super(key: key, child: child);
 
-  final C? cubit;
+  final B? bloc;
   final BlocPresentationWidgetListener listener;
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
-    return _BlocPresentationListenerImpl<C>(
+    return _BlocPresentationListenerImpl<B>(
       listener: listener,
-      cubit: cubit,
+      bloc: bloc,
       child: child ?? const SizedBox(),
     );
   }
 }
 
-class _BlocPresentationListenerImpl<C extends BlocPresentationMixin<Object>>
+class _BlocPresentationListenerImpl<B extends BlocPresentationMixin<Object>>
     extends HookWidget {
   const _BlocPresentationListenerImpl({
     Key? key,
-    this.cubit,
+    this.bloc,
     required this.listener,
     required this.child,
   }) : super(key: key);
 
   final Widget child;
-  final C? cubit;
+  final B? bloc;
   final BlocPresentationWidgetListener listener;
 
   @override
   Widget build(BuildContext context) {
     useBlocPresentationListener(
       listener: listener,
-      cubit: cubit,
+      bloc: bloc,
     );
 
     return child;

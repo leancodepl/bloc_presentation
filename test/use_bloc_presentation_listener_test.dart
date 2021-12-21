@@ -41,17 +41,19 @@ void main() {
     });
 
     testWidgets('Correctly calls the provided listener', (tester) async {
-      await tester.pumpWidget(HookBuilder(
-        builder: (context) {
-          element = context as HookElement;
-          useBlocPresentationListener(
-            listener: listener,
-            cubit: cubit,
-          );
+      await tester.pumpWidget(
+        HookBuilder(
+          builder: (context) {
+            element = context as HookElement;
+            useBlocPresentationListener(
+              listener: listener,
+              bloc: cubit,
+            );
 
-          return Container();
-        },
-      ));
+            return Container();
+          },
+        ),
+      );
 
       cubit.emitEvent(event);
 
@@ -62,17 +64,19 @@ void main() {
     });
 
     testWidgets('Correctly fallsback to the Provider cubit', (tester) async {
-      await tester.pumpWidget(Provider<_TestCubit>.value(
-        value: cubit,
-        child: HookBuilder(
-          builder: (context) {
-            element = context as HookElement;
-            useBlocPresentationListener<_TestCubit>(listener: listener);
+      await tester.pumpWidget(
+        Provider<_TestCubit>.value(
+          value: cubit,
+          child: HookBuilder(
+            builder: (context) {
+              element = context as HookElement;
+              useBlocPresentationListener<_TestCubit>(listener: listener);
 
-            return Container();
-          },
+              return Container();
+            },
+          ),
         ),
-      ));
+      );
 
       cubit.emitEvent(event);
 
@@ -83,16 +87,18 @@ void main() {
     });
 
     testWidgets('Correctly disposes listener', (tester) async {
-      await tester.pumpWidget(HookBuilder(
-        builder: (context) {
-          useBlocPresentationListener(
-            listener: listener,
-            cubit: cubit,
-          );
+      await tester.pumpWidget(
+        HookBuilder(
+          builder: (context) {
+            useBlocPresentationListener(
+              listener: listener,
+              bloc: cubit,
+            );
 
-          return Container();
-        },
-      ));
+            return Container();
+          },
+        ),
+      );
 
       cubit.emitEvent(event);
 
@@ -106,30 +112,34 @@ void main() {
     });
 
     testWidgets('Updates dependencies', (tester) async {
-      await tester.pumpWidget(HookBuilder(
-        builder: (context) {
-          useBlocPresentationListener(
-            listener: listener,
-            cubit: cubit,
-          );
+      await tester.pumpWidget(
+        HookBuilder(
+          builder: (context) {
+            useBlocPresentationListener(
+              listener: listener,
+              bloc: cubit,
+            );
 
-          return Container();
-        },
-      ));
+            return Container();
+          },
+        ),
+      );
 
       cubit.emitEvent(event);
       await tester.pump();
 
-      await tester.pumpWidget(HookBuilder(
-        builder: (context) {
-          useBlocPresentationListener(
-            listener: listener,
-            cubit: cubit,
-          );
+      await tester.pumpWidget(
+        HookBuilder(
+          builder: (context) {
+            useBlocPresentationListener(
+              listener: listener,
+              bloc: cubit,
+            );
 
-          return Container();
-        },
-      ));
+            return Container();
+          },
+        ),
+      );
 
       cubit.emitEvent(event);
       await tester.pump();
@@ -138,16 +148,18 @@ void main() {
 
       final cubit2 = _TestCubit();
 
-      await tester.pumpWidget(HookBuilder(
-        builder: (context) {
-          useBlocPresentationListener(
-            listener: listener,
-            cubit: cubit2,
-          );
+      await tester.pumpWidget(
+        HookBuilder(
+          builder: (context) {
+            useBlocPresentationListener(
+              listener: listener,
+              bloc: cubit2,
+            );
 
-          return Container();
-        },
-      ));
+            return Container();
+          },
+        ),
+      );
 
       cubit2.emitEvent(event);
       cubit.emitEvent(event);
@@ -157,16 +169,18 @@ void main() {
 
       final listener2 = _MockListener();
 
-      await tester.pumpWidget(HookBuilder(
-        builder: (context) {
-          useBlocPresentationListener(
-            listener: listener2,
-            cubit: cubit2,
-          );
+      await tester.pumpWidget(
+        HookBuilder(
+          builder: (context) {
+            useBlocPresentationListener(
+              listener: listener2,
+              bloc: cubit2,
+            );
 
-          return Container();
-        },
-      ));
+            return Container();
+          },
+        ),
+      );
 
       cubit2.emitEvent(event);
       await tester.pump();
