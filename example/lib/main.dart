@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'bloc_presentation Demo',
       theme: ThemeData(),
       home: BlocProvider(
-        create: (context) => CommentCubit(),
+        create: (context) => CommentCubit()..fetch(),
         child: const MyHomePage(),
       ),
     );
