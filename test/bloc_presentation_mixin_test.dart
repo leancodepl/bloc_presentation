@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:bloc_presentation/bloc_presentation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class _TestCubit extends Cubit<int> with BlocPresentationMixin {

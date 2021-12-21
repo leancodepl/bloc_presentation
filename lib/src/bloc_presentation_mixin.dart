@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:bloc_presentation/src/bloc_presentation_event.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// [BlocPresentationMixin] adds a presentation stream to a [BlocBase]
 /// which is automatically disposed.
