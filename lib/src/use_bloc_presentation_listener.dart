@@ -11,18 +11,19 @@ void useBlocPresentationListener<B extends BlocPresentationMixin<Object>>({
   B? bloc,
 }) {
   final context = useContext();
+  final effectiveStream = bloc?.presentation ??
+      context.select<B, Stream<BlocPresentationEvent>>(
+        (bloc) => bloc.presentation,
+      );
 
   useEffect(
     () {
-      final effectiveStream =
-          bloc?.presentation ?? context.read<B>().presentation;
-
       final subscription = effectiveStream.listen(
         (event) => listener(context, event),
       );
 
       return subscription.cancel;
     },
-    [bloc, listener],
+    [effectiveStream, listener],
   );
 }
