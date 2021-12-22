@@ -11,8 +11,8 @@ import 'bloc_presentation_mixin.dart';
 /// with the `event` and is responsible for executing in response to
 /// new events.
 typedef BlocPresentationWidgetListener = void Function(
-  BuildContext,
-  BlocPresentationEvent,
+  BuildContext context,
+  BlocPresentationEvent event,
 );
 
 /// {@template bloc_presentation_listener}
