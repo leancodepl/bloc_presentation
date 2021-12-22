@@ -38,34 +38,15 @@ class BlocPresentationListener<B extends BlocPresentationMixin<Object>>
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
-    return _BlocPresentationListenerImpl<B>(
-      listener: listener,
-      bloc: bloc,
-      child: child ?? const SizedBox(),
+    return HookBuilder(
+      builder: (context) {
+        useBlocPresentationListener(
+          listener: listener,
+          bloc: bloc,
+        );
+
+        return child ?? const SizedBox();
+      },
     );
-  }
-}
-
-class _BlocPresentationListenerImpl<B extends BlocPresentationMixin<Object>>
-    extends HookWidget {
-  const _BlocPresentationListenerImpl({
-    Key? key,
-    this.bloc,
-    required this.listener,
-    required this.child,
-  }) : super(key: key);
-
-  final Widget child;
-  final B? bloc;
-  final BlocPresentationWidgetListener listener;
-
-  @override
-  Widget build(BuildContext context) {
-    useBlocPresentationListener(
-      listener: listener,
-      bloc: bloc,
-    );
-
-    return child;
   }
 }
