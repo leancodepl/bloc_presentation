@@ -1,4 +1,4 @@
-name: login_client_flutter publish
+name: publish
 
 on:
   push:
