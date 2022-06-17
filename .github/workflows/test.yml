@@ -15,9 +15,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - version: 2.10.x
           - channel: stable
           - channel: beta
-          - channel: dev
 
     steps:
       - name: Checkout
@@ -27,6 +27,7 @@ jobs:
         uses: subosito/flutter-action@v1
         with:
           channel: ${{ matrix.channel }}
+          flutter-version: ${{ matrix.version }}
 
       - name: Flutter version
         run: flutter --version
