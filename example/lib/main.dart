@@ -50,7 +50,7 @@ class MyHomePage extends StatelessWidget {
                 children: [
                   Text(
                     'Comment by user with ID: ${state.userId}',
-                    style: Theme.of(context).textTheme.overline,
+                    style: Theme.of(context).textTheme.labelSmall,
                   ),
                   Text(state.content),
                   Text('${state.upvotes} upvotes'),
