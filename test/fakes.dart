@@ -5,6 +5,7 @@ import 'package:mocktail/mocktail.dart';
 class _FakeBuildContext extends Fake implements BuildContext {}
 
 class _FakeBlocPresentationEvent extends Fake implements BlocPresentationEvent {
+  // Flutter 3.3 and 3.7 format this class differently, hence the comment...
 }
 
 void registerFakes() {
