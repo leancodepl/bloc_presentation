@@ -18,7 +18,8 @@ typedef BlocPresentationWidgetListener = void Function(
 /// {@template bloc_presentation_listener}
 /// Widget that listens to new presentation events in a specified [bloc].
 /// {@endtemplate}
-class BlocPresentationListener<B extends BlocPresentationMixin<dynamic>> extends SingleChildStatelessWidget {
+class BlocPresentationListener<B extends BlocPresentationMixin<dynamic>>
+    extends SingleChildStatelessWidget {
   /// {@macro bloc_presentation_listener}
   const BlocPresentationListener({
     Key? key,
