@@ -1,6 +1,6 @@
 name: bloc_presentation
 description: Extends blocs with an additional stream which can serve as a way of indicating single-time events (so-called "presentation events").
-version: 0.2.0
+version: 0.2.1
 homepage: https://github.com/leancodepl/bloc_presentation
 
 environment:
