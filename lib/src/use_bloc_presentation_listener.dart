@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 ///
 /// If [bloc] is omitted, [useBlocPresentationListener] will automatically perform
 /// a lookup using [Provider] and the current `BuildContext`.
-void useBlocPresentationListener<B extends BlocPresentationMixin<Object>>({
+void useBlocPresentationListener<B extends BlocPresentationMixin<dynamic>>({
   required BlocPresentationWidgetListener listener,
   B? bloc,
 }) {
