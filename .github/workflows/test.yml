@@ -14,26 +14,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: ['3.3.10', '3.7.3']
+        version: ['3.3.10', '3.7.10']
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v1
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.version }}
+          cache: true
 
       - name: Flutter version
         run: flutter --version
-
-      - name: Cache pub dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.FLUTTER_HOME }}/.pub-cache
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: ${{ runner.os }}-pub-
 
       - name: Download pub dependencies
         run: flutter pub get
