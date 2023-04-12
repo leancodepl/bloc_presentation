@@ -1,4 +1,4 @@
-name: test
+name: prepare
 
 on:
   push:
@@ -7,33 +7,27 @@ on:
     branches: [master]
 
 jobs:
-  test:
+  main:
     name: Flutter ${{ matrix.version }}
 
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-          version: ['3.3.10', '3.7.3']
+        version: ['3.3.x', '3.7.x']
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v1
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.version }}
+          cache: true
 
       - name: Flutter version
         run: flutter --version
-
-      - name: Cache pub dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.FLUTTER_HOME }}/.pub-cache
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: ${{ runner.os }}-pub-
 
       - name: Download pub dependencies
         run: flutter pub get
@@ -48,5 +42,6 @@ jobs:
         run: flutter test
 
       - name: Dry run pub publish
-        # We don't want it to fail the CI, it's just to see how would `pub publish` behave.
-        run: dart pub publish --dry-run || true
+        uses: leancodepl/mobile-tools/.github/actions/pub-release@pub-release-v1
+        with:
+          dry-run: true
