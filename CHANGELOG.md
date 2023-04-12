@@ -1,3 +1,7 @@
+# 0.2.1+1
+
+- Improve README
+
 # 0.2.1
 
 - Replace listener's bloc state type bound with `dynamic` (by @petrnymsa)
