@@ -3,15 +3,16 @@
 [![pub.dev badge][pub-badge]][pub-badge-link]
 [![Build status][build-badge]][build-badge-link]
 
-Extends blocs with an additional stream which can serve as a way of indicating single-time events (so-called "_presentation events_").
+Extends blocs with an additional stream which can serve as a way of indicating
+single-time events (so-called "_presentation events_").
 
-## installation
+## Installation
 
 ```sh
 flutter pub add bloc_presentation
 ```
 
-## usage
+## Usage
 
 First, create an event which will be emitted:
 
@@ -23,7 +24,8 @@ class FailedToUpvote implements BlocPresentationEvent {
 }
 ```
 
-Next, extend your Bloc/Cubit with the presentation mixin which will give you access to the `emitPresentation` method:
+Next, extend your Bloc/Cubit with the presentation mixin which will give you
+access to the `emitPresentation` method:
 
 ```dart
 class CommentCubit extends Cubit<CommentState> with BlocPresentationMixin {
@@ -31,7 +33,8 @@ class CommentCubit extends Cubit<CommentState> with BlocPresentationMixin {
 }
 ```
 
-Now in your methods instead of emitting new state, you can emit a single-time presentation event without overwriting your bloc/cubit state:
+Now in your methods instead of emitting new state, you can emit a single-time
+presentation event without overwriting your Bloc/Cubit state:
 
 ```dart
 void upvote() {
@@ -46,7 +49,10 @@ void upvote() {
 }
 ```
 
-In this case above, we do not want to lose our bloc/cubit state after a non-fatal failure. Instead, we want to communicate this failure and not emit any new states. Then, in the UI code one can react to such events using `BlocPresentationListener` or `useBlocPresentationListener`:
+In this case above, we do not want to lose our Bloc/Cubit state after a
+non-fatal failure. Instead, we want to communicate this failure and not emit any
+new states. Then, in the UI code one can react to such events using
+`BlocPresentationListener` or `useBlocPresentationListener`:
 
 ```dart
 BlocPresentationListener<CommentCubit>(
@@ -61,11 +67,14 @@ BlocPresentationListener<CommentCubit>(
 )
 ```
 
-By default, `CommentCubit` will be looked up using `package:provider` in the widget tree. However, a bloc can be provided directly using the `BlocPresentationListener.bloc` parameter (analogous to how `package:bloc` listeners work).
+By default, `CommentCubit` will be looked up using `package:provider` in the
+widget tree. However, a bloc can be provided directly using the
+`BlocPresentationListener.bloc` parameter (analogous to how `package:bloc`
+listeners work).
 
-### example
+### Example
 
-See [example](example/lib)
+[Here it is](example/lib).
 
 [pub-badge]: https://img.shields.io/pub/v/bloc_presentation.svg?logo=dart
 [pub-badge-link]: https://pub.dev/packages/bloc_presentation
