@@ -2,10 +2,10 @@ name: publish
 
 on:
   push:
-    tags: ['v*.*.*']
+    tags: ['v*']
 
 jobs:
-  publish:
+  main:
     name: Publish to pub.dev
 
     runs-on: ubuntu-latest
