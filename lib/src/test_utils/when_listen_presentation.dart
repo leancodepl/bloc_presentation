@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc_presentation/src/bloc_presentation_event.dart';
 import 'package:bloc_presentation/src/bloc_presentation_mixin.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 /// Approach 1.
@@ -61,5 +62,46 @@ class MockPresentationBloc<S> extends Mock implements BlocPresentationMixin<S> {
   /// Sends given event to bloc's presentation stream
   void addMockPresentationEvent(BlocPresentationEvent event) {
     _streamController.add(event);
+  }
+}
+
+/// Approach 5. - final
+///
+/// [bloc] - targeted bloc (implementing BlocPresentationMixin)
+/// [events] - events to be emitted from [bloc]'s presentation stream
+/// [controller] - stream controller for managing bloc presentation events
+void whenListenPresentation(
+  BlocPresentationMixin bloc, {
+  List<BlocPresentationEvent>? events,
+  StreamController<BlocPresentationEvent>? controller,
+}) {
+  final effectiveStream =
+      Stream<BlocPresentationEvent>.fromIterable(events ?? []);
+
+  if (controller != null) {
+    controller.addStream(effectiveStream);
+  }
+
+  when(() => bloc.presentation)
+      .thenAnswer((_) => controller?.stream ?? effectiveStream);
+}
+
+/// Approach 6. - final
+///
+/// A mock for [BlocPresentationMixin]ed classes. Allows managing presentation
+/// stream.
+class MockPresentationBloc2<S> extends MockCubit<S>
+    implements BlocPresentationMixin<S> {
+  /// Stubs presentation stream.
+  MockPresentationBloc2() {
+    when(() => presentation).thenAnswer((_) => _presentationController.stream);
+    when(close).thenAnswer((_) => _presentationController.close());
+  }
+
+  final _presentationController = StreamController<BlocPresentationEvent>();
+
+  /// Adds [event] to presentation stream
+  void emitMockPresentationEvent(BlocPresentationEvent event) {
+    _presentationController.add(event);
   }
 }
