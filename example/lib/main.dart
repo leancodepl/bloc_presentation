@@ -35,6 +35,10 @@ class MyHomePage extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(content: Text(event.reason)));
+        } else if (event is SuccessfulUpvote) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text(event.message)));
         }
       },
       child: Scaffold(
