@@ -88,9 +88,30 @@ void whenListenPresentation(
 
 /// Approach 6. - final
 ///
-/// A mock for [BlocPresentationMixin]ed classes. Allows managing presentation
+/// We can also create our own _BlocBase equivalent to avoid presentation
+/// mocking duplication.
+///
+/// A mock for [BlocPresentationMixin]ed cubits. Allows managing presentation
 /// stream.
-class MockPresentationBloc2<S> extends MockCubit<S>
+class MockPresentationCubit<S> extends MockCubit<S>
+    implements BlocPresentationMixin<S> {
+  /// Stubs presentation stream.
+  MockPresentationCubit() {
+    when(() => presentation).thenAnswer((_) => _presentationController.stream);
+    when(close).thenAnswer((_) => _presentationController.close());
+  }
+
+  final _presentationController = StreamController<BlocPresentationEvent>();
+
+  /// Adds [event] to presentation stream
+  void emitMockPresentationEvent(BlocPresentationEvent event) {
+    _presentationController.add(event);
+  }
+}
+
+/// A mock for [BlocPresentationMixin]ed blocs. Allows managing presentation
+/// stream.
+class MockPresentationBloc2<E, S> extends MockBloc<E, S>
     implements BlocPresentationMixin<S> {
   /// Stubs presentation stream.
   MockPresentationBloc2() {
