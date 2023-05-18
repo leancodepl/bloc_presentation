@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockCommentCubit extends MockCubit<CommentState>
+class MockCommentCubit extends MockPresentationCubit<CommentState>
     implements CommentCubit {}
 
 void main() {
@@ -18,21 +18,19 @@ void main() {
     commentCubit = MockCommentCubit();
   });
 
+  tearDown(() {
+    commentCubit.close();
+  });
+
   Future<void> setupScreen(
     WidgetTester tester, {
     CommentState? initialState,
     List<CommentState> states = const [],
-    List<BlocPresentationEvent> presentationEvents = const [],
   }) async {
     whenListen<CommentState>(
       commentCubit,
       Stream.fromIterable(states),
       initialState: initialState ?? const CommentInitialState(),
-    );
-
-    whenListenPresentation2(
-      commentCubit,
-      presentationEvents,
     );
 
     await tester.pumpWidget(
@@ -52,24 +50,40 @@ void main() {
     'MyHomePage',
     () {
       testWidgets(
-        'shows SnackBar with error message when cubit has emitted '
-        'FailedToUpvote presentation event',
+        'shows SnackBar with proper message when cubit has emitted '
+        'BlocPresentationEvent',
         (tester) async {
           await setupScreen(
             tester,
             initialState: _commentReadyState,
-            presentationEvents: [_failedToUpvoteEvent],
           );
+
+          commentCubit.emitMockPresentationEvent(_failedToUpvoteEvent);
 
           await tester.pumpAndSettle();
 
-          final snackBar = find.byType(SnackBar);
+          final snackBar1 = find.byType(SnackBar);
 
-          expect(snackBar, findsOneWidget);
+          expect(snackBar1, findsOneWidget);
           expect(
             find.descendant(
-              of: snackBar,
+              of: snackBar1,
               matching: find.textContaining(_failedToUpvoteEvent.reason),
+            ),
+            findsOneWidget,
+          );
+
+          commentCubit.emitMockPresentationEvent(_successfulUpvoteEvent);
+
+          await tester.pumpAndSettle();
+
+          final snackBar2 = find.byType(SnackBar);
+
+          expect(snackBar2, findsOneWidget);
+          expect(
+            find.descendant(
+              of: snackBar2,
+              matching: find.textContaining(_successfulUpvoteEvent.message),
             ),
             findsOneWidget,
           );
@@ -96,3 +110,4 @@ class _TestApp extends StatelessWidget {
 
 const _commentReadyState = CommentReadyState('Content', 1, 0);
 const _failedToUpvoteEvent = FailedToUpvote('Bad connection');
+const _successfulUpvoteEvent = SuccessfulUpvote('Successful upvote');

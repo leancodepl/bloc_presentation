@@ -12,10 +12,16 @@ class MockCommentCubit extends MockCubit<CommentState>
     implements CommentCubit {}
 
 void main() {
+  late StreamController<BlocPresentationEvent> presentationController;
   late MockCommentCubit commentCubit;
 
   setUp(() {
+    presentationController = StreamController();
     commentCubit = MockCommentCubit();
+  });
+
+  tearDown(() {
+    presentationController.close();
   });
 
   Future<void> setupScreen(
@@ -30,9 +36,10 @@ void main() {
       initialState: initialState ?? const CommentInitialState(),
     );
 
-    whenListenPresentation1(
+    whenListenPresentation(
       commentCubit,
-      Stream.fromIterable(presentationEvents),
+      controller: presentationController,
+      events: presentationEvents,
     );
 
     await tester.pumpWidget(
@@ -52,8 +59,8 @@ void main() {
     'MyHomePage',
     () {
       testWidgets(
-        'shows SnackBar with error message when cubit has emitted '
-        'FailedToUpvote presentation event',
+        'shows SnackBar with proper message when cubit has emitted '
+        'BlocPresentationEvent',
         (tester) async {
           await setupScreen(
             tester,
@@ -63,13 +70,28 @@ void main() {
 
           await tester.pumpAndSettle();
 
-          final snackBar = find.byType(SnackBar);
+          final snackBar1 = find.byType(SnackBar);
 
-          expect(snackBar, findsOneWidget);
+          expect(snackBar1, findsOneWidget);
           expect(
             find.descendant(
-              of: snackBar,
+              of: snackBar1,
               matching: find.textContaining(_failedToUpvoteEvent.reason),
+            ),
+            findsOneWidget,
+          );
+
+          presentationController.add(_successfulUpvoteEvent);
+
+          await tester.pumpAndSettle();
+
+          final snackBar2 = find.byType(SnackBar);
+
+          expect(snackBar2, findsOneWidget);
+          expect(
+            find.descendant(
+              of: snackBar2,
+              matching: find.textContaining(_successfulUpvoteEvent.message),
             ),
             findsOneWidget,
           );
@@ -96,3 +118,4 @@ class _TestApp extends StatelessWidget {
 
 const _commentReadyState = CommentReadyState('Content', 1, 0);
 const _failedToUpvoteEvent = FailedToUpvote('Bad connection');
+const _successfulUpvoteEvent = SuccessfulUpvote('Successful upvote');
