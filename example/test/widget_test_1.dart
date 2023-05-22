@@ -36,9 +36,8 @@ void main() {
       initialState: initialState ?? const CommentInitialState(),
     );
 
-    whenListenPresentation(
+    presentationController = whenListenPresentation(
       commentCubit,
-      controller: presentationController,
       events: presentationEvents,
     );
 

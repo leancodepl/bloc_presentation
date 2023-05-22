@@ -4,23 +4,17 @@ import 'package:bloc_presentation/src/bloc_presentation_event.dart';
 import 'package:bloc_presentation/src/bloc_presentation_mixin.dart';
 import 'package:mocktail/mocktail.dart';
 
-/// Approach 1.
-///
 /// [bloc] - targeted bloc (implementing BlocPresentationMixin)
 /// [events] - events to be emitted from [bloc]'s presentation stream
-/// [controller] - stream controller for managing bloc presentation events
-void whenListenPresentation(
+StreamController<BlocPresentationEvent> whenListenPresentation(
   BlocPresentationMixin bloc, {
-  List<BlocPresentationEvent>? events,
-  StreamController<BlocPresentationEvent>? controller,
+  List<BlocPresentationEvent>? initialEvents,
 }) {
-  final effectiveStream =
-      Stream<BlocPresentationEvent>.fromIterable(events ?? []);
-
-  if (controller != null) {
-    controller.addStream(effectiveStream);
-  }
+  final presentationController = StreamController<BlocPresentationEvent>()
+    ..addStream(Stream.fromIterable(initialEvents ?? []));
 
   when(() => bloc.presentation)
-      .thenAnswer((_) => controller?.stream ?? effectiveStream);
+      .thenAnswer((_) => presentationController.stream);
+
+  return presentationController;
 }
