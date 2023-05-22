@@ -8,37 +8,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockCommentCubit extends MockCubit<CommentState>
+class MockCommentCubit extends MockPresentationCubit2<CommentState>
     implements CommentCubit {}
 
 void main() {
-  late StreamController<BlocPresentationEvent> presentationController;
   late MockCommentCubit commentCubit;
 
   setUp(() {
-    presentationController = StreamController();
     commentCubit = MockCommentCubit();
   });
 
   tearDown(() {
-    presentationController.close();
+    commentCubit.close();
   });
 
   Future<void> setupScreen(
     WidgetTester tester, {
     CommentState? initialState,
     List<CommentState> states = const [],
-    List<BlocPresentationEvent> presentationEvents = const [],
   }) async {
     whenListen<CommentState>(
       commentCubit,
       Stream.fromIterable(states),
       initialState: initialState ?? const CommentInitialState(),
-    );
-
-    presentationController = whenListenPresentation(
-      commentCubit,
-      initialEvents: presentationEvents,
     );
 
     await tester.pumpWidget(
@@ -64,8 +56,9 @@ void main() {
           await setupScreen(
             tester,
             initialState: _commentReadyState,
-            presentationEvents: [_failedToUpvoteEvent],
           );
+
+          commentCubit.emitMockPresentationEvent(_failedToUpvoteEvent);
 
           await tester.pumpAndSettle();
 
@@ -80,7 +73,7 @@ void main() {
             findsOneWidget,
           );
 
-          presentationController.add(_successfulUpvoteEvent);
+          commentCubit.emitMockPresentationEvent(_successfulUpvoteEvent);
 
           await tester.pumpAndSettle();
 
