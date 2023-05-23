@@ -58,7 +58,7 @@ void main() {
             initialState: _commentReadyState,
           );
 
-          commentCubit.emitMockPresentationEvent(_failedToUpvoteEvent);
+          commentCubit.emitMockPresentation(_failedToUpvoteEvent);
 
           await tester.pumpAndSettle();
 
@@ -73,7 +73,7 @@ void main() {
             findsOneWidget,
           );
 
-          commentCubit.emitMockPresentationEvent(_successfulUpvoteEvent);
+          commentCubit.emitMockPresentation(_successfulUpvoteEvent);
 
           await tester.pumpAndSettle();
 

@@ -25,7 +25,7 @@ class _MockBlocPresentationBase<S> extends Mock
 
   final _presentationController = StreamController<BlocPresentationEvent>();
 
-  void emitMockPresentationEvent(BlocPresentationEvent event) {
+  void emitMockPresentation(BlocPresentationEvent event) {
     _presentationController.add(event);
   }
 }
