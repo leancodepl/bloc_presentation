@@ -16,19 +16,20 @@ void main() {
   late MockCommentCubit commentCubit;
 
   setUp(() {
-    presentationController = StreamController();
     commentCubit = MockCommentCubit();
   });
 
   tearDown(() {
-    presentationController.close();
+    // By calling commentCubit.close, StreamController returned by
+    // whenListenPresentation is automatically closed.
+    commentCubit.close();
   });
 
   Future<void> setupScreen(
     WidgetTester tester, {
     CommentState? initialState,
     List<CommentState> states = const [],
-    List<BlocPresentationEvent> presentationEvents = const [],
+    List<BlocPresentationEvent>? presentationEvents,
   }) async {
     whenListen<CommentState>(
       commentCubit,
@@ -94,6 +95,26 @@ void main() {
             ),
             findsOneWidget,
           );
+        },
+      );
+
+      // This test shows that presentation stream is automatically mocked even
+      // if presentation events have not been specified in
+      // whenListenPresentation (cubit's presentation getter returns empty
+      // stream by default).
+      testWidgets(
+        'does not SnackBar bar BlocPresentationEvent has not been emitted',
+        (tester) async {
+          await setupScreen(
+            tester,
+            initialState: _commentReadyState,
+          );
+
+          await tester.pumpAndSettle();
+
+          final snackBar = find.byType(SnackBar);
+
+          expect(snackBar, findsNothing);
         },
       );
     },

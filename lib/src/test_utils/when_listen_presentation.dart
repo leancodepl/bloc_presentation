@@ -19,5 +19,7 @@ StreamController<BlocPresentationEvent> whenListenPresentation(
   when(() => bloc.presentation)
       .thenAnswer((_) => presentationController.stream);
 
+  when(bloc.close).thenAnswer((_) => presentationController.close());
+
   return presentationController;
 }
