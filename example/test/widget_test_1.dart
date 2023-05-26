@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockCommentCubit extends MockCubit<CommentState>
-    implements CommentCubit {}
+class MockCommentCubit extends MockCubit<CommentState> //
+    implements
+        CommentCubit {}
 
 void main() {
   late StreamController<BlocPresentationEvent> presentationController;
