@@ -26,6 +26,7 @@ class CommentCubit extends Cubit<CommentState> with BlocPresentationMixin {
       // we can emit it and forget about cleaning it from the state
       emitPresentation(const FailedToUpvote('bad connection'));
     } else {
+      emitPresentation(const SuccessfulUpvote('Successful upvote'));
       emit(CommentReadyState(state.content, state.userId, state.upvotes + 1));
     }
   }
@@ -35,6 +36,12 @@ class FailedToUpvote implements BlocPresentationEvent {
   const FailedToUpvote(this.reason);
 
   final String reason;
+}
+
+class SuccessfulUpvote implements BlocPresentationEvent {
+  const SuccessfulUpvote(this.message);
+
+  final String message;
 }
 
 abstract class CommentState {
