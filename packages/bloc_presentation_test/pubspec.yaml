@@ -11,6 +11,7 @@ dependencies:
   bloc_presentation: ^0.2.1+1
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.0.0
   mocktail: ^0.3.0
 
 dev_dependencies:
