@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:bloc/bloc.dart';
 import 'package:bloc_presentation/bloc_presentation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 
 /// A mock for [BlocPresentationMixin]ed blocs. Allows managing presentation

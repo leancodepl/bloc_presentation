@@ -8,11 +8,11 @@ environment:
   flutter: '>=3.3.0'
 
 dependencies:
+  bloc: ^8.0.0
   bloc_presentation:
     path: ../bloc_presentation
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.0.0
   mocktail: ^0.3.0
 
 dev_dependencies:
