@@ -10,9 +10,9 @@ environment:
 
 dependencies:
   bloc_presentation:
-    path: ..
+    path: ../packages/bloc_presentation
   bloc_presentation_test:
-    path: "../packages/bloc_presentation_test"
+    path: ../packages/bloc_presentation_test
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.0
