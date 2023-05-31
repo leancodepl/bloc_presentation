@@ -3,7 +3,7 @@ description: >
   Extends blocs with an additional stream which can serve as a way of indicating
   single-time events (so-called "presentation events").
 version: 0.2.1+1
-homepage: https://github.com/leancodepl/bloc_presentation
+homepage: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
