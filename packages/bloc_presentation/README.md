@@ -78,5 +78,5 @@ listeners work).
 
 [pub-badge]: https://img.shields.io/pub/v/bloc_presentation.svg?logo=dart
 [pub-badge-link]: https://pub.dev/packages/bloc_presentation
-[build-badge]: https://github.com/leancodepl/bloc_presentation/workflows/test/badge.svg
-[build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions
+[build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
+[build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation-test.yml
