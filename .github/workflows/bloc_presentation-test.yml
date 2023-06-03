@@ -6,12 +6,12 @@ on:
     ignore-tags: ['bloc_presentation-v*']
     paths:
       - 'packages/bloc_presentation/**'
-      - ".github/workflows/bloc_presentation-test.yml"
+      - .github/workflows/bloc_presentation-test.yml
   pull_request:
     branches: [master]
     paths:
       - 'packages/bloc_presentation/**'
-      - ".github/workflows/bloc_presentation-test.yml"
+      - .github/workflows/bloc_presentation-test.yml
 
 jobs:
   test:
@@ -58,3 +58,7 @@ jobs:
 
       - name: Run tests
         run: flutter test
+
+      - name: Dry run pub publish
+        # We don't want it to fail the CI, it's just to see how would `pub publish` behave.
+        run: dart pub publish --dry-run || true

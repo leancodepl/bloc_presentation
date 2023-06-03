@@ -6,12 +6,12 @@ on:
     ignore-tags: [ 'bloc_presentation-v*', 'bloc_presentation_test-v*' ]
     paths:
       - 'example/**'
-      - ".github/workflows/example-test.yml"
+      - .github/workflows/example-test.yml
   pull_request:
     branches: [ master ]
     paths:
       - 'example/**'
-      - ".github/workflows/example-test.yml"
+      - .github/workflows/example-test.yml
 
 jobs:
   test:

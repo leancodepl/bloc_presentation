@@ -6,12 +6,12 @@ on:
     ignore-tags: ['bloc_presentation_test-v*']
     paths:
       - 'packages/bloc_presentation_test/**'
-      - ".github/workflows/bloc_presentation_test-test.yml"
+      - .github/workflows/bloc_presentation_test-test.yml
   pull_request:
     branches: [master]
     paths:
       - 'packages/bloc_presentation_test/**'
-      - ".github/workflows/bloc_presentation_test-test.yml"
+      - .github/workflows/bloc_presentation_test-test.yml
 
 jobs:
   test:
@@ -55,3 +55,7 @@ jobs:
 
       - name: Run analyzer
         run: flutter analyze --fatal-warnings --fatal-infos
+
+      - name: Dry run pub publish
+        # We don't want it to fail the CI, it's just to see how would `pub publish` behave.
+        run: dart pub publish --dry-run || true
