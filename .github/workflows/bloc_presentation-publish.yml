@@ -25,7 +25,13 @@ jobs:
       - name: Setup Dart
         uses: dart-lang/setup-dart@v1
         with:
-          sdk: 3.0.0
+          sdk: 2.18.6
 
-      - name: Publish
-        run: dart pub publish -f
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.x'
+          cache: true
+
+      - name: Publish and release
+        uses: leancodepl/mobile-tools/.github/actions/pub-release@pub-release-v1
