@@ -1,6 +1,6 @@
 name: bloc_presentation_test
 description: A testing library for bloc_presentation.
-version: 0.0.1
+version: 0.1.0
 homepage: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
 
 environment:
