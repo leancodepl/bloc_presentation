@@ -1,0 +1,60 @@
+name: bloc_presentation test
+
+on:
+  push:
+    branches: [master]
+    ignore-tags: ['bloc_presentation-v*']
+    paths:
+      - 'packages/bloc_presentation/**'
+      - ".github/workflows/bloc_presentation-test.yml"
+  pull_request:
+    branches: [master]
+    paths:
+      - 'packages/bloc_presentation/**'
+      - ".github/workflows/bloc_presentation-test.yml"
+
+jobs:
+  test:
+    name: Flutter ${{ matrix.version }}
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ['3.3.x', '3.7.x']
+
+    defaults:
+      run:
+        working-directory: packages/bloc_presentation
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.version }}
+          cache: true
+
+      - name: Flutter version
+        run: flutter --version
+
+      - name: Cache pub dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-pub-
+
+      - name: Download pub dependencies
+        run: flutter pub get
+
+      - name: Check formatting
+        run: dart format --set-exit-if-changed --output none .
+
+      - name: Run analyzer
+        run: flutter analyze --fatal-warnings --fatal-infos
+
+      - name: Run tests
+        run: flutter test

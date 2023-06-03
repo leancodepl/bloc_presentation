@@ -9,8 +9,7 @@ environment:
   sdk: '>=2.15.1 <3.0.0'
 
 dependencies:
-  bloc_presentation:
-    path: ../packages/bloc_presentation
+  bloc_presentation: 0.2.1+1
   bloc_presentation_test:
     path: ../packages/bloc_presentation_test
   flutter:

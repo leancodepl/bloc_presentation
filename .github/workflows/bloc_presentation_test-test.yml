@@ -1,13 +1,20 @@
-name: prepare
+name: bloc_presentation_test test
 
 on:
   push:
     branches: [master]
+    ignore-tags: ['bloc_presentation_test-v*']
+    paths:
+      - 'packages/bloc_presentation_test/**'
+      - ".github/workflows/bloc_presentation_test-test.yml"
   pull_request:
     branches: [master]
+    paths:
+      - 'packages/bloc_presentation_test/**'
+      - ".github/workflows/bloc_presentation_test-test.yml"
 
 jobs:
-  main:
+  test:
     name: Flutter ${{ matrix.version }}
 
     runs-on: ubuntu-latest
@@ -16,11 +23,15 @@ jobs:
       matrix:
         version: ['3.3.x', '3.7.x']
 
+    defaults:
+      run:
+        working-directory: packages/bloc_presentation_test
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Flutter
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ matrix.version }}
@@ -28,6 +39,13 @@ jobs:
 
       - name: Flutter version
         run: flutter --version
+
+      - name: Cache pub dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-pub-
 
       - name: Download pub dependencies
         run: flutter pub get
@@ -37,11 +55,3 @@ jobs:
 
       - name: Run analyzer
         run: flutter analyze --fatal-warnings --fatal-infos
-
-      - name: Run tests
-        run: flutter test
-
-      - name: Dry run pub publish
-        uses: leancodepl/mobile-tools/.github/actions/pub-release@pub-release-v1
-        with:
-          dry-run: true
