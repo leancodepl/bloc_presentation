@@ -1,39 +1,74 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# bloc_presentation_test
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+[![pub.dev badge][pub-badge]][pub-badge-link]
+[![Build status][build-badge]][build-badge-link]
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+A package which makes testing `bloc_presentation_mixin`ed `bloc`s / `cubit`s more straightforward.
+To be used with `bloc_presentation` package.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Installation
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```sh
+flutter pub add bloc_presentation_test
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+There are 2 ways of stubbing `presentation` stream:
+
+1. using `whenListenPresentation` function
+2. extending targeted `bloc_presentation_mixin`ed `bloc` / `cubit` with `MockPresentationBloc` / `MockPresentationCubit`
+
+### 1. Approach - `whenListenPresentation`
+
+First, create a mock class of your `bloc_presentation_mixin`ed `bloc` / `cubit` using `MockCubit` from `bloc_test` package.
 
 ```dart
-const like = 'sample';
+class MockCommentCubit extends MockCubit implements CommentCubit {}
 ```
 
-## Additional information
+Then, create an instance of `MockCommentCubit` and obtain `StreamController` by calling `whenListenPresentation` with newly created mocked cubit.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+final mockCubit = MockCommentCubit();
+
+final controller = whenListenPresentation(mockCubit);
+```
+
+It will stub `mockCubit`'s `presentation` stream, so you are able to subscribe to this stream. Obtained controller can be used for adding events to `presentation` stream.
+
+```dart
+controller.add(const FailedToUpvote());
+```
+
+If you specify `initialEvents` argument, `presentation` stream will be stubbed with a stream of given events.
+
+```dart
+final controller = whenListenPresentation(
+  mockCubit,
+  const [FailedToUpvote(), SuccessfulUpvote()],
+);
+```
+
+### 2. Approach - `MockPresentationCubit` / `MockPresentationBloc`
+
+First, create a mock class of your `bloc_presentation_mixin`ed `bloc` / `cubit` using .
+
+```dart
+class MockCommentCubit extends MockPresentationCubit<CommentState> implements CommentCubit {}
+```
+
+Then, create an instance of a `MockCommentCubit` and call `emitMockPresentation`.
+
+```dart
+final mockCubit = MockCommentCubit();
+
+mockCubit.emitMockPresentation(const FailedToUpvote());
+```
+
+It will add `FailedToUpvoteEvent` to `presentation` stream.
+
+[pub-badge]: https://img.shields.io/pub/v/bloc_presentation_test.svg?logo=dart
+[pub-badge-link]: https://pub.dev/packages/bloc_presentation_test
+[build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation_test-test.yml?branch=master
+[build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation_test-test.yml
