@@ -37,9 +37,6 @@ jobs:
           flutter-version: ${{ matrix.version }}
           cache: true
 
-      - name: Flutter version
-        run: flutter --version
-
       - name: Download pub dependencies
         run: flutter pub get
 
