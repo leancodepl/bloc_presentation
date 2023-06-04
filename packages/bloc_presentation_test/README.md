@@ -17,17 +17,19 @@ flutter pub add bloc_presentation_test
 There are 2 ways of stubbing `presentation` stream:
 
 1. using `whenListenPresentation` function
-2. extending targeted `bloc_presentation_mixin`ed `bloc` / `cubit` with `MockPresentationBloc` / `MockPresentationCubit`
+2. extending target `bloc_presentation_mixin`ed `bloc` / `cubit` with `MockPresentationBloc` / `MockPresentationCubit`
 
 ### 1. Approach - `whenListenPresentation`
 
-First, create a mock class of your `bloc_presentation_mixin`ed `bloc` / `cubit` using `MockCubit` from `bloc_test` package.
+First, create a mock class of your `bloc_presentation_mixin`ed `bloc` / `cubit`.
+For example, you can use `bloc_test` package to achieve that.
 
 ```dart
 class MockCommentCubit extends MockCubit implements CommentCubit {}
 ```
 
-Then, create an instance of `MockCommentCubit` and obtain `StreamController` by calling `whenListenPresentation` with newly created mocked cubit.
+Then, create an instance of `MockCommentCubit` and obtain `StreamController` by calling `whenListenPresentation` with
+newly created mocked cubit.
 
 ```dart
 final mockCubit = MockCommentCubit();
@@ -35,7 +37,8 @@ final mockCubit = MockCommentCubit();
 final controller = whenListenPresentation(mockCubit);
 ```
 
-It will stub `mockCubit`'s `presentation` stream, so you are able to subscribe to this stream. Obtained controller can be used for adding events to `presentation` stream.
+It will stub `mockCubit`'s `presentation` stream, so you are able to subscribe to this stream. Obtained controller can
+be used for adding events to `presentation` stream.
 
 ```dart
 controller.add(const FailedToUpvote());
@@ -49,6 +52,8 @@ final controller = whenListenPresentation(
   const [FailedToUpvote(), SuccessfulUpvote()],
 );
 ```
+
+After all, remember to close the StreamController. It can be achieved by calling `mockCubit`'s `close` method.
 
 ### 2. Approach - `MockPresentationCubit` / `MockPresentationBloc`
 
@@ -68,7 +73,12 @@ mockCubit.emitMockPresentation(const FailedToUpvote());
 
 It will add `FailedToUpvoteEvent` to `presentation` stream.
 
+After all, remember to close the StreamController. It can be achieved by calling `mockCubit`'s `close` method.
+
 [pub-badge]: https://img.shields.io/pub/v/bloc_presentation_test.svg?logo=dart
+
 [pub-badge-link]: https://pub.dev/packages/bloc_presentation_test
+
 [build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation_test-test.yml?branch=master
+
 [build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation_test-test.yml
