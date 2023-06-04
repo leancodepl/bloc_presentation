@@ -1,76 +1,234 @@
+import 'dart:async';
+
 import 'package:bloc_presentation/bloc_presentation.dart';
+import 'package:bloc_presentation_test/bloc_presentation_test.dart';
+import 'package:bloc_presentation_test_example/app.dart';
 import 'package:bloc_presentation_test_example/comment_cubit.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
 
-// TODO: Adjust effective pub package example
+class MockCommentCubit1 extends MockPresentationCubit<CommentState>
+    implements CommentCubit {}
+
+class MockCommentCubit2 extends MockCubit<CommentState> //
+    implements
+        CommentCubit {}
 
 void main() {
-  runApp(const MyApp());
+  mainMockPresentationCubit();
+  mainWhenListenPresentation();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+// MockPresentationCubit approach
+void mainMockPresentationCubit() {
+  late MockCommentCubit1 commentCubit;
+
+  setUp(() {
+    commentCubit = MockCommentCubit1();
+  });
+
+  tearDown(() {
+    commentCubit.close();
+  });
+
+  Future<void> setupScreen(
+    WidgetTester tester, {
+    CommentState? initialState,
+    List<CommentState> states = const [],
+    List<BlocPresentationEvent>? presentationEvents,
+  }) async {
+    whenListen<CommentState>(
+      commentCubit,
+      Stream.fromIterable(states),
+      initialState: initialState ?? const CommentInitialState(),
+    );
+
+    await tester.pumpWidget(
+      _TestApp(
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<CommentCubit>.value(value: commentCubit),
+          ],
+          child: const HomePage(),
+        ),
+      ),
+    );
+    await tester.pump();
+  }
+
+  group(
+    'HomePage',
+    () {
+      testWidgets(
+        'shows SnackBar with proper message when cubit has emitted '
+        'BlocPresentationEvent',
+        (tester) async {
+          await setupScreen(
+            tester,
+            initialState: _commentReadyState,
+          );
+
+          commentCubit.emitMockPresentation(_failedToUpvoteEvent);
+
+          await tester.pumpAndSettle();
+
+          final snackBar1 = find.byType(SnackBar);
+
+          expect(snackBar1, findsOneWidget);
+          expect(
+            find.descendant(
+              of: snackBar1,
+              matching: find.textContaining(_failedToUpvoteEvent.reason),
+            ),
+            findsOneWidget,
+          );
+
+          commentCubit.emitMockPresentation(_successfulUpvoteEvent);
+
+          await tester.pumpAndSettle();
+
+          final snackBar2 = find.byType(SnackBar);
+
+          expect(snackBar2, findsOneWidget);
+          expect(
+            find.descendant(
+              of: snackBar2,
+              matching: find.textContaining(_successfulUpvoteEvent.message),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+    },
+  );
+}
+
+// whenListenPresentation approach
+void mainWhenListenPresentation() {
+  late StreamController<BlocPresentationEvent> presentationController;
+  late MockCommentCubit2 commentCubit;
+
+  setUp(() {
+    commentCubit = MockCommentCubit2();
+  });
+
+  tearDown(() {
+    commentCubit.close();
+  });
+
+  Future<void> setupScreen(
+    WidgetTester tester, {
+    CommentState? initialState,
+    List<CommentState> states = const [],
+    List<BlocPresentationEvent>? presentationEvents,
+  }) async {
+    whenListen<CommentState>(
+      commentCubit,
+      Stream.fromIterable(states),
+      initialState: initialState ?? const CommentInitialState(),
+    );
+
+    presentationController = whenListenPresentation(
+      commentCubit,
+      initialEvents: presentationEvents,
+    );
+
+    await tester.pumpWidget(
+      _TestApp(
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<CommentCubit>.value(value: commentCubit),
+          ],
+          child: const HomePage(),
+        ),
+      ),
+    );
+    await tester.pump();
+  }
+
+  group(
+    'HomePage',
+    () {
+      testWidgets(
+        'shows SnackBar with proper message when cubit has emitted '
+        'BlocPresentationEvent',
+        (tester) async {
+          await setupScreen(
+            tester,
+            initialState: _commentReadyState,
+            presentationEvents: [_failedToUpvoteEvent],
+          );
+
+          await tester.pumpAndSettle();
+
+          final snackBar1 = find.byType(SnackBar);
+
+          expect(snackBar1, findsOneWidget);
+          expect(
+            find.descendant(
+              of: snackBar1,
+              matching: find.textContaining(_failedToUpvoteEvent.reason),
+            ),
+            findsOneWidget,
+          );
+
+          presentationController.add(_successfulUpvoteEvent);
+
+          await tester.pumpAndSettle();
+
+          final snackBar2 = find.byType(SnackBar);
+
+          expect(snackBar2, findsOneWidget);
+          expect(
+            find.descendant(
+              of: snackBar2,
+              matching: find.textContaining(_successfulUpvoteEvent.message),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+
+      // This test shows that presentation stream is automatically mocked even
+      // if presentation events have not been specified in
+      // whenListenPresentation (cubit's presentation getter returns empty
+      // stream by default).
+      testWidgets(
+        'does not SnackBar bar BlocPresentationEvent has not been emitted',
+        (tester) async {
+          await setupScreen(
+            tester,
+            initialState: _commentReadyState,
+          );
+
+          await tester.pumpAndSettle();
+
+          final snackBar = find.byType(SnackBar);
+
+          expect(snackBar, findsNothing);
+        },
+      );
+    },
+  );
+}
+
+class _TestApp extends StatelessWidget {
+  const _TestApp({
+    required this.child,
+  });
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'bloc_presentation Demo',
-      theme: ThemeData(),
-      home: BlocProvider(
-        create: (context) => CommentCubit()..fetch(),
-        child: const MyHomePage(),
-      ),
+      home: child,
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocPresentationListener<CommentCubit>(
-      listener: (context, event) {
-        // we know we will receive this event once
-        if (event is FailedToUpvote) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(event.reason)));
-        } else if (event is SuccessfulUpvote) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(event.message)));
-        }
-      },
-      child: Scaffold(
-        body: Center(
-          child: BlocBuilder<CommentCubit, CommentState>(
-            builder: (context, state) {
-              if (state is! CommentReadyState) {
-                return const CircularProgressIndicator();
-              }
-
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Comment by user with ID: ${state.userId}',
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                  Text(state.content),
-                  Text('${state.upvotes} upvotes'),
-                ],
-              );
-            },
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => context.read<CommentCubit>().upvote(),
-          tooltip: 'Upvote!',
-          child: const Icon(Icons.arrow_upward),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
-      ),
-    );
-  }
-}
+const _commentReadyState = CommentReadyState('Content', 1, 0);
+const _failedToUpvoteEvent = FailedToUpvote('Bad connection');
+const _successfulUpvoteEvent = SuccessfulUpvote('Successful upvote');
