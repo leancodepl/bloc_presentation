@@ -35,3 +35,5 @@ jobs:
 
       - name: Publish and release
         uses: leancodepl/mobile-tools/.github/actions/pub-release@pub-release-v1
+        with:
+          path: packages/bloc_presentation_test

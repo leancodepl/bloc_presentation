@@ -50,3 +50,4 @@ jobs:
         uses: leancodepl/mobile-tools/.github/actions/pub-release@pub-release-v1
         with:
           dry-run: true
+          path: packages/bloc_presentation_test
