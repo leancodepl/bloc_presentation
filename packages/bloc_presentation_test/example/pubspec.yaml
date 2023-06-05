@@ -10,8 +10,7 @@ environment:
 
 dependencies:
   bloc: ^8.0.0
-  bloc_presentation:
-    path: ../../bloc_presentation
+  bloc_presentation: 0.2.1+1
   bloc_presentation_test:
     path: ..
   bloc_test: 9.1.2
@@ -19,3 +18,7 @@ dependencies:
 
 dev_dependencies:
   leancode_lint: '>=2.1.0 < 2.2.0'
+
+dependency_overrides:
+  bloc_presentation:
+    path: ../../bloc_presentation
