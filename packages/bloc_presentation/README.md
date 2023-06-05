@@ -74,7 +74,7 @@ listeners work).
 
 ### Example
 
-[Here it is.](../../example/lib).
+[Here it is.](example/lib).
 
 [pub-badge]: https://img.shields.io/pub/v/bloc_presentation.svg?logo=dart
 [pub-badge-link]: https://pub.dev/packages/bloc_presentation
