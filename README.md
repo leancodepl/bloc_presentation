@@ -1,6 +1,6 @@
-| Package | Documentation | pub | CI |
-| - | :-: | :-: | :-: |
-| [`bloc_presentation`][bloc_presentation-link] | [Documentation][bloc_presentation-documentation] | [![bloc_presentation pub.dev badge][bloc_presentation-pub-badge]][bloc_presentation-pub-badge-link] | [![][bloc_presentation-build-badge]][bloc_presentation-build-badge-link] |
+| Package                                                 | Documentation                                         | pub                                                                                                                | CI                                                                                 |
+|---------------------------------------------------------|:-----------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------:|
+| [`bloc_presentation`][bloc_presentation-link]           | [Documentation][bloc_presentation-documentation]      | [![bloc_presentation pub.dev badge][bloc_presentation-pub-badge]][bloc_presentation-pub-badge-link]                | [![][bloc_presentation-build-badge]][bloc_presentation-build-badge-link]           |
 | [`bloc_presentation_test`][bloc_presentation_test-link] | [Documentation][bloc_presentation_test-documentation] | [![bloc_presentation_test pub.dev badge][bloc_presentation_test-pub-badge]][bloc_presentation_test-pub-badge-link] | [![][bloc_presentation_test-build-badge]][bloc_presentation_test-build-badge-link] |
 
 ## pub.dev release process
