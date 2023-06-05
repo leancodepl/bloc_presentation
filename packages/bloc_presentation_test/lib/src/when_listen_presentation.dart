@@ -9,12 +9,13 @@ import 'package:mocktail/mocktail.dart';
 ///
 /// [initialEvents] can be provided for stubbing bloc's presentation stream
 /// before subscribing to bloc's presentation stream.
-StreamController<BlocPresentationEvent> whenListenPresentation(
+StreamController<T> whenListenPresentation<T extends BlocPresentationEvent>(
   BlocPresentationMixin bloc, {
-  List<BlocPresentationEvent>? initialEvents,
+  List<T>? initialEvents,
 }) {
-  final presentationController = StreamController<BlocPresentationEvent>()
-    ..addStream(Stream.fromIterable(initialEvents ?? []));
+  final presentationController = StreamController<T>();
+
+  initialEvents?.forEach(presentationController.add);
 
   when(() => bloc.presentation)
       .thenAnswer((_) => presentationController.stream);
