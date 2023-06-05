@@ -50,5 +50,6 @@ jobs:
         run: flutter test
 
       - name: Dry run pub publish
-        # We don't want it to fail the CI, it's just to see how would `pub publish` behave.
-        run: dart pub publish --dry-run || true
+        uses: leancodepl/mobile-tools/.github/actions/pub-release@pub-release-v1
+        with:
+          dry-run: true
