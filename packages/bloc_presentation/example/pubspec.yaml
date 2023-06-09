@@ -11,12 +11,12 @@ environment:
 dependencies:
   bloc_presentation:
     path: ..
-  bloc_test: ^9.1.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.0
 
 dev_dependencies:
+  bloc_test: 9.1.2
   flutter_test:
     sdk: flutter
   leancode_lint: '>=2.1.0 < 2.2.0'

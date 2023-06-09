@@ -1,0 +1,53 @@
+name: bloc_presentation_test test
+
+on:
+  push:
+    branches: [master]
+    ignore-tags: ['bloc_presentation_test-v*']
+    paths:
+      - 'packages/bloc_presentation_test/**'
+      - .github/workflows/bloc_presentation_test-test.yml
+  pull_request:
+    branches: [master]
+    paths:
+      - 'packages/bloc_presentation_test/**'
+      - .github/workflows/bloc_presentation_test-test.yml
+
+jobs:
+  test:
+    name: Flutter ${{ matrix.version }}
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ['3.3.x', '3.7.x']
+
+    defaults:
+      run:
+        working-directory: packages/bloc_presentation_test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.version }}
+          cache: true
+
+      - name: Download pub dependencies
+        run: flutter pub get
+
+      - name: Check formatting
+        run: dart format --set-exit-if-changed --output none .
+
+      - name: Run analyzer
+        run: flutter analyze --fatal-warnings --fatal-infos
+
+      - name: Dry run pub publish
+        uses: leancodepl/mobile-tools/.github/actions/pub-release@pub-release-v1
+        with:
+          dry-run: true
+          path: packages/bloc_presentation_test

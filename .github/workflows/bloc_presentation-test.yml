@@ -1,13 +1,20 @@
-name: prepare
+name: bloc_presentation test
 
 on:
   push:
     branches: [master]
+    ignore-tags: ['bloc_presentation-v*']
+    paths:
+      - 'packages/bloc_presentation/**'
+      - .github/workflows/bloc_presentation-test.yml
   pull_request:
     branches: [master]
+    paths:
+      - 'packages/bloc_presentation/**'
+      - .github/workflows/bloc_presentation-test.yml
 
 jobs:
-  main:
+  test:
     name: Flutter ${{ matrix.version }}
 
     runs-on: ubuntu-latest
@@ -15,6 +22,10 @@ jobs:
       fail-fast: false
       matrix:
         version: ['3.3.x', '3.7.x']
+
+    defaults:
+      run:
+        working-directory: packages/bloc_presentation
 
     steps:
       - name: Checkout
@@ -25,9 +36,6 @@ jobs:
         with:
           flutter-version: ${{ matrix.version }}
           cache: true
-
-      - name: Flutter version
-        run: flutter --version
 
       - name: Download pub dependencies
         run: flutter pub get
@@ -45,3 +53,4 @@ jobs:
         uses: leancodepl/mobile-tools/.github/actions/pub-release@pub-release-v1
         with:
           dry-run: true
+          path: packages/bloc_presentation
