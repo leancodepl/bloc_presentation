@@ -3,7 +3,7 @@
 [![pub.dev badge][pub-badge]][pub-badge-link]
 [![Build status][build-badge]][build-badge-link]
 
-A package which makes testing `bloc_presentation_mixin`ed `bloc`s / `cubit`s more straightforward.
+A package which makes testing `BlocPresentationMixin`ed `Bloc`s/`Cubit`s more straightforward.
 To be used with `bloc_presentation` package.
 
 ## Installation
@@ -17,11 +17,11 @@ flutter pub add --dev bloc_presentation_test
 There are 2 ways of stubbing `presentation` stream:
 
 1. using `whenListenPresentation` function
-2. extending target `BlocPresentationMixin`ed `Bloc` / `Cubit` with `MockPresentationBloc` / `MockPresentationCubit`
+2. extending target `BlocPresentationMixin`ed `Bloc`/`Cubit` with `MockPresentationBloc`/`MockPresentationCubit`
 
 ### 1. Approach - `whenListenPresentation`
 
-First, create a mock class of your `BlocPresentationMixin`ed `Bloc` / `Cubit`.
+First, create a mock class of your `BlocPresentationMixin`ed `Bloc`/`Cubit`.
 For example, you can use `bloc_test` package to achieve that.
 
 ```dart
@@ -39,8 +39,9 @@ final controller = whenListenPresentation(mockCubit);
 
 It will stub `MockCommentCubit`'s `presentation` stream, so you are able to subscribe to this stream.
 Obtained controller can be used for adding events to `presentation` stream.
-`StreamController` can be closed via `MockCommentCubit`'s close method (if `MockCommentCubit`'s close method was not 
-re-mocked after calling `whenListenPresentation`) or directly by calling `controller`'s `close` method.
+
+The returned `StreamController` is disposed in `Cubit`'s/`Bloc`'s `close` method. 
+If you override the stub for this method then you need to dispose the controller manually.
 
 ```dart
 controller.add(const FailedToUpvote());
@@ -55,9 +56,9 @@ final controller = whenListenPresentation(
 );
 ```
 
-### 2. Approach - `MockPresentationCubit` / `MockPresentationBloc`
+### 2. Approach - `MockPresentationCubit`/`MockPresentationBloc`
 
-First, create a mock class of your `BlocPresentationMixin`ed `Bloc` / `Cubit` using `MockPresentationBloc` / `MockPresentationCubit`.
+First, create a mock class of your `BlocPresentationMixin`ed `Bloc`/`Cubit` using `MockPresentationBloc`/`MockPresentationCubit`.
 
 ```dart
 class MockCommentCubit extends MockPresentationCubit<CommentState> implements CommentCubit {}
