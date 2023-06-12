@@ -1,6 +1,7 @@
 # 0.1.1
 
-- Improves pub score.
+- Increase max Dart version constraint to 4.0.0.
+- Add Flutter to dependencies.
 
 # 0.1.0
 
