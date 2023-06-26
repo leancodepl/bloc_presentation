@@ -1,3 +1,7 @@
+# 0.2.1+2
+
+- Fix example path in README
+
 # 0.2.1+1
 
 - Improve README
