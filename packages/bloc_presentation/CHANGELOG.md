@@ -1,3 +1,7 @@
+# Unreleased
+
+- Bump `flutter_hooks` to `^0.19.0` (#22)
+
 # 0.2.1+2
 
 - Fix example path in README
