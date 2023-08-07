@@ -1,4 +1,4 @@
-# Unreleased
+# 0.3.0
 
 - Bump minimum Flutter version to `3.10.0` (#22)
 - Bump dependency on `flutter_hooks` to `^0.20.0` (#22)
