@@ -19,7 +19,7 @@ dependencies:
   test: ^1.24.3
 
 dev_dependencies:
-  leancode_lint: '>=2.1.0 < 2.2.0'
+  leancode_lint: '>=5.0.0'
 
 dependency_overrides:
   bloc_presentation:
