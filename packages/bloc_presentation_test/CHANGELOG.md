@@ -1,4 +1,4 @@
-# Unreleased
+# 0.2.0
 
 - Bump minimum Flutter version to `3.10.0` (#22)
 - Bump dependency on `mocktail` to `^1.0.0` (#22)
