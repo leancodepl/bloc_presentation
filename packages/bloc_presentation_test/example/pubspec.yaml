@@ -1,12 +1,11 @@
 name: bloc_presentation_test_example
 description: bloc_presentation_test example
-
-publish_to: 'none'
-
+publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.15.1 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.10.0'
 
 dependencies:
   bloc: ^8.0.0
@@ -19,7 +18,7 @@ dependencies:
   test: ^1.24.3
 
 dev_dependencies:
-  leancode_lint: '>=2.1.0 < 2.2.0'
+  leancode_lint: '>=5.0.0'
 
 dependency_overrides:
   bloc_presentation:

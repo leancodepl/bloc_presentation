@@ -22,11 +22,11 @@ class BlocPresentationListener<B extends BlocPresentationMixin<dynamic>>
     extends SingleChildStatelessWidget {
   /// {@macro bloc_presentation_listener}
   const BlocPresentationListener({
-    Key? key,
+    super.key,
     this.bloc,
     required this.listener,
-    Widget? child,
-  }) : super(key: key, child: child);
+    super.child,
+  });
 
   /// The [bloc] that the [BlocPresentationListener] will interact with.
   /// If omitted, [BlocPresentationListener] will automatically perform a lookup using
