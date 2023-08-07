@@ -1,12 +1,11 @@
 name: bloc_presentation_test_example
 description: bloc_presentation_test example
-
-publish_to: 'none'
-
+publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.15.1 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.10.0'
 
 dependencies:
   bloc: ^8.0.0
