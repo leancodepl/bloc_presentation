@@ -3,7 +3,7 @@ name: bloc_presentation_test test
 on:
   push:
     branches: [master]
-    ignore-tags: ['bloc_presentation_test-v*']
+    tags-ignore: ['bloc_presentation_test-v*']
     paths:
       - 'packages/bloc_presentation_test/**'
       - .github/workflows/bloc_presentation_test-test.yml
