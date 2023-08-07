@@ -1,10 +1,7 @@
 # Unreleased
 
-- Bump dependencies (#22)
-  - Bump minimum Flutter version to `3.10.0`
-  - Bump dependency on `flutter_hooks` to `^0.20.0`
-  - Bump dependency on `leancode_lint` to `^5.0.0`
-  - Bump dependency on `mocktail` to `^1.0.0`
+- Bump minimum Flutter version to `3.10.0` (#22)
+- Bump dependency on `flutter_hooks` to `^0.20.0` (#22)
 
 # 0.2.1+2
 
