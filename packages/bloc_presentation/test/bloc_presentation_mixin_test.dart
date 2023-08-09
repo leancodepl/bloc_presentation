@@ -2,14 +2,16 @@ import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class _TestCubit extends Cubit<int> with BlocPresentationMixin {
+class _TestCubit extends Cubit<int> with BlocPresentationMixin<int, _Event> {
   _TestCubit() : super(0);
 
   void emitValueEvent() => emitPresentation(_ValueEvent());
   void emitReferenceEvent() => emitPresentation(_ReferenceEvent());
 }
 
-class _ValueEvent implements BlocPresentationEvent {
+sealed class _Event {}
+
+class _ValueEvent implements _Event {
   @override
   bool operator ==(Object other) => other is _ValueEvent;
 
@@ -17,7 +19,7 @@ class _ValueEvent implements BlocPresentationEvent {
   int get hashCode => 0;
 }
 
-class _ReferenceEvent implements BlocPresentationEvent {}
+class _ReferenceEvent implements _Event {}
 
 void main() {
   group('BlocPresentationMixin', () {

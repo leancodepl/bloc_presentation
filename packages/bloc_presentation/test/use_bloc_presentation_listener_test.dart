@@ -8,29 +8,33 @@ import 'package:provider/provider.dart';
 
 import 'fakes.dart';
 
-class _TestCubit extends Cubit<int> with BlocPresentationMixin {
+class _TestCubit extends Cubit<int>
+    with BlocPresentationMixin<int, _PresentationEvent> {
   _TestCubit() : super(0);
 
-  void emitEvent(BlocPresentationEvent event) => emitPresentation(event);
+  void emitEvent(_PresentationEvent event) => emitPresentation(event);
 }
 
-class _PresentationEvent implements BlocPresentationEvent {}
+class _PresentationEvent {}
 
 class _MockListener extends Mock {
   void call(
     BuildContext context,
-    BlocPresentationEvent event,
+    _PresentationEvent event,
   );
 }
 
 void main() {
   group('useBlocPresentationListener', () {
     late _TestCubit cubit;
-    late BlocPresentationWidgetListener listener;
-    late BlocPresentationEvent event;
+    late BlocPresentationWidgetListener<_PresentationEvent> listener;
+    late _PresentationEvent event;
     late HookElement element;
 
-    setUpAll(registerFakes);
+    setUpAll(() {
+      registerFakes();
+      registerFallbackValue(_PresentationEvent());
+    });
 
     setUp(() {
       cubit = _TestCubit();
@@ -70,7 +74,9 @@ void main() {
           child: HookBuilder(
             builder: (context) {
               element = context as HookElement;
-              useBlocPresentationListener<_TestCubit>(listener: listener);
+              useBlocPresentationListener<_TestCubit, _PresentationEvent>(
+                listener: listener,
+              );
 
               return Container();
             },
@@ -172,7 +178,7 @@ void main() {
       await tester.pumpWidget(
         HookBuilder(
           builder: (context) {
-            useBlocPresentationListener(
+            useBlocPresentationListener<_TestCubit, _PresentationEvent>(
               listener: listener2,
               bloc: cubit2,
             );
