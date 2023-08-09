@@ -6,15 +6,14 @@ import 'package:provider/provider.dart';
 ///
 /// If [bloc] is omitted, [useBlocPresentationListener] will automatically perform
 /// a lookup using [Provider] and the current `BuildContext`.
-void useBlocPresentationListener<B extends BlocPresentationMixin<dynamic>>({
-  required BlocPresentationWidgetListener listener,
+void useBlocPresentationListener<B extends BlocPresentationMixin<dynamic, P>,
+    P>({
+  required BlocPresentationWidgetListener<P> listener,
   B? bloc,
 }) {
   final context = useContext();
   final effectiveStream = bloc?.presentation ??
-      context.select<B, Stream<BlocPresentationEvent>>(
-        (bloc) => bloc.presentation,
-      );
+      context.select<B, Stream<P>>((bloc) => bloc.presentation);
 
   useEffect(
     () {
