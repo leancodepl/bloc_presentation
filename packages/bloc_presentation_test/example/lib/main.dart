@@ -6,15 +6,19 @@ import 'package:bloc_presentation_test/bloc_presentation_test.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:test/test.dart';
 
-class CounterCubit extends Cubit<int> with BlocPresentationMixin {
+class CounterCubit extends Cubit<int>
+    with BlocPresentationMixin<int, CounterCubitEvent> {
   CounterCubit() : super(0);
 }
 
-class CounterPresentationEvent extends BlocPresentationEvent {
+sealed class CounterCubitEvent {}
+
+class CounterPresentationEvent implements CounterCubitEvent {
   const CounterPresentationEvent();
 }
 
-class MockCounterPresentationCubit extends MockPresentationCubit<int>
+class MockCounterPresentationCubit
+    extends MockPresentationCubit<int, CounterCubitEvent>
     implements CounterCubit {}
 
 class MockCounterCubit extends MockCubit<int> implements CounterCubit {}
@@ -54,7 +58,7 @@ void mainMockPresentationCubit() {
 
 void mainWhenListenPresentation() {
   late MockCounterCubit mockCubit;
-  late StreamController<CounterPresentationEvent> controller;
+  late StreamController<CounterCubitEvent> controller;
 
   setUp(() {
     mockCubit = MockCounterCubit();
