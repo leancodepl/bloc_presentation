@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   bloc: ^8.0.0
-  bloc_presentation: ^0.2.1+1
+  bloc_presentation: ^0.4.0
   flutter:
     sdk: flutter
   mocktail: ^1.0.0
