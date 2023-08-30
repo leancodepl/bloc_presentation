@@ -1,3 +1,8 @@
+# 0.4.0
+
+- **BREAKING**: `BlocPresentationMixin` is now generic over the type of the presentation event (see #17)
+- **BREAKING**: removed `BlocPresentationEvent` marker type
+
 # 0.3.0
 
 - Bump minimum Flutter version to `3.10.0` (#22)

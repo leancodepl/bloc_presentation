@@ -18,7 +18,7 @@ dev_dependencies:
   bloc_test: ^9.1.2
   flutter_test:
     sdk: flutter
-  leancode_lint: '^5.0.0'
+  leancode_lint: ">=5.0.0 <7.0.0"
 
 flutter:
   uses-material-design: true

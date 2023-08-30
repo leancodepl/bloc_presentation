@@ -17,7 +17,9 @@ flutter pub add bloc_presentation
 First, create an event which will be emitted:
 
 ```dart
-class FailedToUpvote implements BlocPresentationEvent {
+sealed class CommentCubitEvent {}
+
+class FailedToUpvote implements CommentCubitEvent {
   const FailedToUpvote(this.reason);
 
   final String reason;
@@ -28,7 +30,7 @@ Next, extend your Bloc/Cubit with the presentation mixin which will give you
 access to the `emitPresentation` method:
 
 ```dart
-class CommentCubit extends Cubit<CommentState> with BlocPresentationMixin {
+class CommentCubit extends Cubit<CommentState> with BlocPresentationMixin<CommentState, CommentCubitEvent> {
   // body
 }
 ```
@@ -55,12 +57,13 @@ new states. Then, in the UI code one can react to such events using
 `BlocPresentationListener` or `useBlocPresentationListener`:
 
 ```dart
-BlocPresentationListener<CommentCubit>(
+BlocPresentationListener<CommentCubit, CommentCubitEvent>(
   listener: (context, event) {
-    if (event is FailedToUpvote) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-		..showSnackBar(SnackBar(content: Text(event.reason)));
+    switch (event) {
+      case FailedToUpvote():
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(SnackBar(content: Text(event.reason)));
     }
   },
   child: MyWidget(),
