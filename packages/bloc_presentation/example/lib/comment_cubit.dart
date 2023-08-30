@@ -3,7 +3,8 @@ import 'dart:math';
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CommentCubit extends Cubit<CommentState> with BlocPresentationMixin {
+class CommentCubit extends Cubit<CommentState>
+    with BlocPresentationMixin<CommentState, CommentEvent> {
   CommentCubit() : super(const CommentInitialState());
 
   void fetch() {
@@ -32,13 +33,15 @@ class CommentCubit extends Cubit<CommentState> with BlocPresentationMixin {
   }
 }
 
-class FailedToUpvote implements BlocPresentationEvent {
+sealed class CommentEvent {}
+
+class FailedToUpvote implements CommentEvent {
   const FailedToUpvote(this.reason);
 
   final String reason;
 }
 
-class SuccessfulUpvote implements BlocPresentationEvent {
+class SuccessfulUpvote implements CommentEvent {
   const SuccessfulUpvote(this.message);
 
   final String message;

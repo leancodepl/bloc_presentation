@@ -28,17 +28,18 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocPresentationListener<CommentCubit>(
+    return BlocPresentationListener<CommentCubit, CommentEvent>(
       listener: (context, event) {
         // we know we will receive this event once
-        if (event is FailedToUpvote) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(event.reason)));
-        } else if (event is SuccessfulUpvote) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text(event.message)));
+        switch (event) {
+          case FailedToUpvote():
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text(event.reason)));
+          case SuccessfulUpvote():
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text(event.message)));
         }
       },
       child: Scaffold(
