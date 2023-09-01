@@ -13,7 +13,7 @@ class CounterCubit extends Cubit<int>
 
 sealed class CounterCubitEvent {}
 
-class CounterPresentationEvent implements CounterCubitEvent {
+final class CounterPresentationEvent implements CounterCubitEvent {
   const CounterPresentationEvent();
 }
 
