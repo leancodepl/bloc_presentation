@@ -1,3 +1,7 @@
+# 0.3.0
+
+- Bump dependency on `bloc_presentation` to `^0.4.0` (#25)
+
 # 0.2.0
 
 - Bump minimum Flutter version to `3.10.0` (#22)
