@@ -9,6 +9,10 @@ import 'package:test/test.dart';
 class CounterCubit extends Cubit<int>
     with BlocPresentationMixin<int, CounterCubitEvent> {
   CounterCubit() : super(0);
+
+  void count() {
+    emitPresentation(const CounterPresentationEvent());
+  }
 }
 
 sealed class CounterCubitEvent {}
@@ -26,6 +30,7 @@ class MockCounterCubit extends MockCubit<int> implements CounterCubit {}
 void main() {
   mainMockPresentationCubit();
   mainWhenListenPresentation();
+  mainBlocPresentationTest();
 }
 
 void mainMockPresentationCubit() {
@@ -87,5 +92,24 @@ void mainWhenListenPresentation() {
         ),
       );
     },
+  );
+}
+
+void mainBlocPresentationTest() {
+  CounterCubit buildCubit() => CounterCubit();
+
+  blocPresentationTest<CounterCubit, int, CounterCubitEvent>(
+    'emits correct presentation event if count has been called',
+    build: buildCubit,
+    act: (cubit) => cubit.count(),
+    expectPresentation: () => const [
+      CounterPresentationEvent(),
+    ],
+  );
+
+  blocPresentationTest<CounterCubit, int, CounterCubitEvent>(
+    'does not emit presentation event if count has not ben called',
+    build: buildCubit,
+    expectPresentation: () => const <CounterPresentationEvent>[],
   );
 }
