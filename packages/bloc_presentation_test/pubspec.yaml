@@ -10,8 +10,12 @@ environment:
 dependencies:
   bloc: ^8.0.0
   bloc_presentation: ^0.4.0
+  diff_match_patch: ^0.4.1
   flutter:
     sdk: flutter
+  flutter_test:
+    sdk: flutter
+  meta: ^1.9.1
   mocktail: ^1.0.0
 
 dev_dependencies:
