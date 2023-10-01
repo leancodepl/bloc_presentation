@@ -1,3 +1,7 @@
+# 0.4.0
+
+- Add `blocPresentationTest` function
+
 # 0.3.0
 
 - Bump dependency on `bloc_presentation` to `^0.4.0` (#25)
