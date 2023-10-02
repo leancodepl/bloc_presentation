@@ -122,6 +122,7 @@ Future<void>
   }
 }
 
+// Based on bloc_test package
 Future<void> _runZonedGuarded(Future<void> Function() body) {
   final completer = Completer<void>();
 
