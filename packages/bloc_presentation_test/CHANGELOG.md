@@ -1,4 +1,4 @@
-# 0.4.0
+# 1.0.0-pre.1
 
 - Add `blocPresentationTest` function
 
