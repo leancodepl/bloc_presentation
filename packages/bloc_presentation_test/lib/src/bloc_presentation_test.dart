@@ -5,11 +5,14 @@ import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:meta/meta.dart';
 import 'package:test/test.dart';
 
-/// This function provides a possibility to test [BlocPresentationMixin]ed
-/// blocs / cubits.
+/// This function provides a possibility to test blocs / cubits with
+/// `BlocPresentationMixin` mixed in.
 ///
 /// Events emitted via presentation stream can be verified by
 /// [expectPresentation].
+///
+/// This function is not intended to verify states, but
+/// only to verify presentation events.
 @isTest
 void blocPresentationTest<B extends BlocPresentationMixin<State, P>, State, P>(
   String description, {
