@@ -1,8 +1,9 @@
 import 'dart:async';
+
 import 'package:bloc_presentation/bloc_presentation.dart';
 import 'package:diff_match_patch/diff_match_patch.dart';
-import 'package:flutter_test/flutter_test.dart' as test;
 import 'package:meta/meta.dart';
+import 'package:test/test.dart';
 
 /// This function provides a possibility to test [BlocPresentationMixin]ed
 /// blocs / cubits.
@@ -22,7 +23,7 @@ void blocPresentationTest<B extends BlocPresentationMixin<State, P>, State, P>(
   FutureOr<void> Function()? tearDown,
   dynamic tags,
 }) {
-  test.test(
+  test(
     description,
     () async {
       await testBlocPresentation<B, State, P>(
@@ -86,8 +87,8 @@ Future<void>
       shallowEquality = '$events' == '$expected';
 
       try {
-        test.expect(events, test.wrapMatcher(expected));
-      } on test.TestFailure catch (e) {
+        expect(events, wrapMatcher(expected));
+      } on TestFailure catch (e) {
         if (shallowEquality || expected is! List<P>) {
           rethrow;
         }
@@ -96,16 +97,16 @@ Future<void>
         final message = '${e.message}\n$diff';
 
         // ignore: only_throw_errors
-        throw test.TestFailure(message);
+        throw TestFailure(message);
       }
 
       await subscription.cancel();
       await tearDown?.call();
     });
   } catch (e) {
-    if (shallowEquality && e is test.TestFailure) {
+    if (shallowEquality && e is TestFailure) {
       // ignore: only_throw_errors
-      throw test.TestFailure(
+      throw TestFailure(
         '''
         ${e.message}
         WARNING: Please ensure presentation events instances extend Equatable, override == and hashCode, or implement Comparable.
