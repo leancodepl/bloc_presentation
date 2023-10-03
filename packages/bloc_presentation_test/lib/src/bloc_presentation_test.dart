@@ -111,10 +111,9 @@ Future<void>
       // ignore: only_throw_errors
       throw TestFailure(
         '''
-        ${e.message}
-        WARNING: Please ensure presentation events instances extend Equatable, override == and hashCode, or implement Comparable.
-        Alternatively, consider using Matchers in the expectPresentation of the blocPresentationTest rather than concrete presentation events instances.\n
-        ''',
+${e.message}
+WARNING: Please ensure presentation events instances extend Equatable, override == and hashCode, or implement Comparable.
+Alternatively, consider using Matchers in the expectPresentation of the blocPresentationTest rather than concrete presentation events instances.\n''',
       );
     }
 
