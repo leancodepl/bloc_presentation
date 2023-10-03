@@ -17,7 +17,8 @@ class MyCubit extends Cubit<MyState> with BlocPresentationMixin {
 }
 ```
 
-then put inside your `HookWidget`'s `build` method:
+You can listen to its events via the `useOnStreamChange` hook:
+
 ```dart
 useOnStreamChange(
   bloc.presentation, 
