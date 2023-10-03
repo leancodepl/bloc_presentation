@@ -19,3 +19,4 @@ dependencies:
 
 dev_dependencies:
   leancode_lint: '>=5.0.0'
+  equatable:
