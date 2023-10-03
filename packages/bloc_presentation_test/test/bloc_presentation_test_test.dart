@@ -418,7 +418,7 @@ void main() {
     group('NonEquatableCounterCubit', () {
       test('adds additional warning to thrown exception message', () async {
         const warning = '\n'
-            'WARNING: Please ensure presentation events instances extend Equatable, override == and hashCode, or implement Comparable.\n'
+            'WARNING: Please ensure presentation events extend Equatable, override == and hashCode, or implement Comparable.\n'
             'Alternatively, consider using Matchers in the expectPresentation of the blocPresentationTest rather than concrete presentation events instances.\n';
         late Object actualError;
         final completer = Completer<void>();
