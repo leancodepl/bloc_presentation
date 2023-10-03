@@ -20,3 +20,23 @@ Tag your desired commit with `<package_name>-v<version>` and let the GitHub Acti
 [bloc_presentation_test-pub-badge-link]: https://pub.dev/packages/bloc_presentation_test
 [bloc_presentation_test-build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation_test-test.yml?branch=master
 [bloc_presentation_test-build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation_test-test.yml
+
+## How to use BlocPresentationMixin with flutter_hooks
+
+Let's assume:
+
+```dart
+class MyCubit extends Cubit<MyState> with BlocPresentationMixin {
+    (...)
+}
+```
+
+then put inside your `HookWidget`'s `build` method:
+```dart
+useOnStreamChange(
+  bloc.presentation, 
+  (event) {
+    // Implement your listener here
+  },
+)
+```
