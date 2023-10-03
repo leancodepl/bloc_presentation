@@ -153,7 +153,6 @@ void main() {
       await tester.pump();
 
       verifyNever(() => listener(any(), event));
-
       verify(() => listener2(any(), event)).called(1);
     });
   });
