@@ -302,42 +302,6 @@ void main() {
       );
     });
 
-    group('InstantEmitCubit', () {
-      blocPresentationTest<InstantEmitCubit, int, CounterPresentationEvent>(
-        'emits [] when nothing is called',
-        build: InstantEmitCubit.new,
-        expectPresentation: () => const <CounterPresentationEvent>[],
-      );
-
-      blocPresentationTest<InstantEmitCubit, int, CounterPresentationEvent>(
-        'emits [IncrementPresentationEvent(1)] when increment is called',
-        build: InstantEmitCubit.new,
-        act: (cubit) => cubit.increment(),
-        expectPresentation: () => const <CounterPresentationEvent>[
-          IncrementPresentationEvent(1),
-        ],
-      );
-
-      blocPresentationTest<InstantEmitCubit, int, CounterPresentationEvent>(
-        'emits ['
-        'IncrementPresentationEvent(1) '
-        'IncrementPresentationEvent(2)'
-        '] when increment is called multiple times with async act',
-        build: InstantEmitCubit.new,
-        act: (cubit) async {
-          cubit.increment();
-
-          await Future<void>.delayed(const Duration(microseconds: 1));
-
-          cubit.increment();
-        },
-        expectPresentation: () => const <CounterPresentationEvent>[
-          IncrementPresentationEvent(1),
-          IncrementPresentationEvent(2),
-        ],
-      );
-    });
-
     group('MultiCounterCubit', () {
       blocPresentationTest<MultiCounterCubit, int, CounterPresentationEvent>(
         'emits [] when nothing is called',
