@@ -6,13 +6,6 @@ sealed class CounterPresentationEvent extends Equatable {
   final int number;
 }
 
-final class InitialPresentationEvent extends CounterPresentationEvent {
-  const InitialPresentationEvent(super.number);
-
-  @override
-  List<Object?> get props => [number];
-}
-
 final class IncrementPresentationEvent extends CounterPresentationEvent {
   const IncrementPresentationEvent(super.number);
 
