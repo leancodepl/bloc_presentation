@@ -83,9 +83,7 @@ class _BlocPresentationListenerBaseState<
 
     _bloc = _bloc = widget.bloc ?? context.read<B>();
 
-    _streamSubscription = _bloc.presentation.listen(
-      (event) => widget.listener(context, event),
-    );
+    _subscribe();
   }
 
   @override
