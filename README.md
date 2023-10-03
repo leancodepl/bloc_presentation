@@ -9,7 +9,7 @@ Tag your desired commit with `<package_name>-v<version>` and let the GitHub Acti
 
 ## How to use BlocPresentationMixin with flutter_hooks
 
-Let's assume:
+Let's assume you have a cubit that emits presentation events:
 
 ```dart
 class MyCubit extends Cubit<MyState> with BlocPresentationMixin {
