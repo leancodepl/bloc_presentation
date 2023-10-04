@@ -14,7 +14,7 @@ typedef BlocPresentationWidgetListener<P> = void Function(
   P event,
 );
 
-/// A widget that listens to events from a Bloc and invokes a listener
+/// A widget that listens to events from a bloc or cubit and invokes a listener
 /// function in response to new events.
 ///
 /// This widget is used to interact with [BlocPresentationMixin] and listen
