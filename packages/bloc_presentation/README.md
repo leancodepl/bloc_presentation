@@ -110,3 +110,10 @@ useOnStreamChange(
 [pub-badge-link]: https://pub.dev/packages/bloc_presentation
 [build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
 [build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation-test.yml
+
+[bloc_presentation_test-link]: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
+[bloc_presentation_test-documentation]: https://pub.dev/documentation/bloc_presentation_test/latest/
+[bloc_presentation_test-pub-badge]: https://img.shields.io/pub/v/bloc_presentation_test
+[bloc_presentation_test-pub-badge-link]: https://pub.dev/packages/bloc_presentation_test
+[bloc_presentation_test-build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation_test-test.yml?branch=master
+[bloc_presentation_test-build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation_test-test.yml
