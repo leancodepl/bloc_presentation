@@ -7,27 +7,6 @@
 
 Tag your desired commit with `<package_name>-v<version>` and let the GitHub Actions do the rest.
 
-## How to use BlocPresentationMixin with flutter_hooks
-
-Let's assume you have a cubit that emits presentation events:
-
-```dart
-class MyCubit extends Cubit<MyState> with BlocPresentationMixin {
-    (...)
-}
-```
-
-You can listen to its events via the `useOnStreamChange` hook:
-
-```dart
-useOnStreamChange(
-  bloc.presentation, 
-  (event) {
-    // Implement your listener here
-  },
-)
-```
-
 [bloc_presentation-link]: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation
 [bloc_presentation-documentation]: https://pub.dev/documentation/bloc_presentation/latest/
 [bloc_presentation-pub-badge]: https://img.shields.io/pub/v/bloc_presentation

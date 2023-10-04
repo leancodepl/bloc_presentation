@@ -43,15 +43,12 @@ class BlocPresentationListener<B extends BlocPresentationMixin<dynamic, P>, P>
   /// The [bloc] parameter is optional and can be used to specify the
   /// Bloc to listen to. If not provided, the nearest ancestor Bloc of
   /// type [B] in the widget tree will be used.
-  ///
-  /// The [child] parameter is optional and represents the child widget
-  /// to display. If not provided, an empty [SizedBox] is used as the child.
   const BlocPresentationListener({
     super.key,
     required this.listener,
     this.bloc,
-    this.child,
-  }) : super(child: child);
+    super.child,
+  });
 
   /// A function that defines the behavior when a new event of type [P] is
   /// emitted by the Bloc. It takes the current [BuildContext] and the
@@ -61,10 +58,6 @@ class BlocPresentationListener<B extends BlocPresentationMixin<dynamic, P>, P>
   /// The Bloc from which to listen to events of type [P]. If not provided,
   /// the nearest ancestor Bloc of type [B] in the widget tree will be used.
   final B? bloc;
-
-  /// An optional child widget to display within the [BlocPresentationListener].
-  /// If not provided, an empty [SizedBox] is used as the child.
-  final Widget? child;
 
   @override
   SingleChildState<BlocPresentationListener<B, P>> createState() =>
@@ -81,7 +74,7 @@ class _BlocPresentationListenerBaseState<
   void initState() {
     super.initState();
 
-    _bloc = _bloc = widget.bloc ?? context.read<B>();
+    _bloc = widget.bloc ?? context.read<B>();
 
     _subscribe();
   }

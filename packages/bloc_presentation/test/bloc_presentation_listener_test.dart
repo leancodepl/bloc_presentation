@@ -24,7 +24,7 @@ class _MockListener extends Mock {
 }
 
 void main() {
-  group('useBlocPresentationListener', () {
+  group('BlocPresentationListener', () {
     late _TestCubit cubit;
     late BlocPresentationWidgetListener<_PresentationEvent> listener;
     late _PresentationEvent event;
