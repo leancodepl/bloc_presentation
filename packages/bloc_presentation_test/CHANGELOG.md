@@ -1,3 +1,7 @@
+# 1.0.0-pre.1
+
+- Add `blocPresentationTest` function
+
 # 0.3.0
 
 - Bump dependency on `bloc_presentation` to `^0.4.0` (#25)
@@ -14,4 +18,4 @@
 
 # 0.1.0
 
-- Initial release. Includes `MockPresentationBloc` / `MockPresentationCubit` and `whenListenPresentation`.
+- Initial release. Includes `MockPresentationBloc`/`MockPresentationCubit` and `whenListenPresentation`.
