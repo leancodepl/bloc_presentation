@@ -100,6 +100,12 @@ useOnStreamChange(
 
 [Here it is.](/packages/bloc_presentation/example/lib)
 
+### Testing
+
+| Package                                                 | Documentation                                         | pub                                                                                                                | CI                                                                                 |
+|---------------------------------------------------------|:-----------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------:|
+| [`bloc_presentation_test`][bloc_presentation_test-link] | [Documentation][bloc_presentation_test-documentation] | [![bloc_presentation_test pub.dev badge][bloc_presentation_test-pub-badge]][bloc_presentation_test-pub-badge-link] | [![][bloc_presentation_test-build-badge]][bloc_presentation_test-build-badge-link] |
+
 [pub-badge]: https://img.shields.io/pub/v/bloc_presentation.svg?logo=dart
 [pub-badge-link]: https://pub.dev/packages/bloc_presentation
 [build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
