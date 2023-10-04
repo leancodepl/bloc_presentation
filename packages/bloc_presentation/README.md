@@ -75,6 +75,10 @@ widget tree. However, a bloc can be provided directly using the
 `BlocPresentationListener.bloc` parameter (analogous to how `package:bloc`
 listeners work).
 
+### Example
+
+[Here it is.](/packages/bloc_presentation/example/lib)
+
 ## Usage with flutter_hooks
 
 Let's assume you have a cubit that emits presentation events:
@@ -96,11 +100,12 @@ useOnStreamChange(
 )
 ```
 
-### Example
+## Testing
 
-[Here it is.](/packages/bloc_presentation/example/lib)
+In order to to make testing of this package more straightforward, please, check out the [bloc_presentation_test][bloc_presentation_test-link] package.
 
 [pub-badge]: https://img.shields.io/pub/v/bloc_presentation.svg?logo=dart
 [pub-badge-link]: https://pub.dev/packages/bloc_presentation
 [build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
 [build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation-test.yml
+[bloc_presentation_test-link]: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test

@@ -1,3 +1,8 @@
+# 1.0.0
+
+- **BREAKING**: Removed `useBlocPresentationListener` hook. Use `useOnStreamChanged` from `flutter_hooks` instead.
+- Removed dependency on `flutter_hooks`.
+
 # 0.4.0
 
 - **BREAKING**: `BlocPresentationMixin` is now generic over the type of the presentation event (see #17)

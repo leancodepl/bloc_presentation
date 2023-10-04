@@ -1,3 +1,7 @@
+# 1.0.0
+
+- Bump dependency on `bloc_presentation` to `^1.0.0`
+
 # 1.0.0-pre.1
 
 - Add `blocPresentationTest` function
