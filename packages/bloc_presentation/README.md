@@ -75,6 +75,27 @@ widget tree. However, a bloc can be provided directly using the
 `BlocPresentationListener.bloc` parameter (analogous to how `package:bloc`
 listeners work).
 
+## Usage with flutter_hooks
+
+Let's assume you have a cubit that emits presentation events:
+
+```dart
+class MyCubit extends Cubit<MyState> with BlocPresentationMixin {
+    (...)
+}
+```
+
+You can listen to its events via the `useOnStreamChange` hook:
+
+```dart
+useOnStreamChange(
+  bloc.presentation, 
+  (event) {
+    // Implement your listener here
+  },
+)
+```
+
 ### Example
 
 [Here it is.](/packages/bloc_presentation/example/lib)
