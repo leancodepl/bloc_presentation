@@ -1,3 +1,7 @@
+# 1.0.0
+
+- **BREAKING**: Remove `useBlocPresentationListener` hook and replace it with `BlocPresentationListener` widget.
+
 # 0.4.0
 
 - **BREAKING**: `BlocPresentationMixin` is now generic over the type of the presentation event (see #17)
