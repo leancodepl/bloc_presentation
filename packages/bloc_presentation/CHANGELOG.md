@@ -1,6 +1,6 @@
 # 1.0.0
 
-- **BREAKING**: Remove `useBlocPresentationListener` hook and replace it with `BlocPresentationListener` widget.
+- **BREAKING**: Removed `useBlocPresentationListener` hook and reimplemented `BlocPresentationListener` widget because of `flutter_hooks` dependencies removal.
 
 # 0.4.0
 
