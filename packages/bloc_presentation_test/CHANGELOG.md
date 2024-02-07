@@ -1,3 +1,7 @@
+# 1.1.0
+
+- Make `MockPresentationCubit` and `MockPresentationBloc` presentation streams broadcast ones.
+
 # 1.0.0
 
 - Bump dependency on `bloc_presentation` to `^1.0.0`

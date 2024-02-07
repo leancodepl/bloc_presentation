@@ -241,6 +241,20 @@ void main() {
           expect((actualError as TestFailure).message, expectedError);
         },
       );
+
+      test('allows to listen to presentation stream three times', () {
+        final cubit = CounterCubit();
+
+        final subs = [
+          cubit.presentation.listen((_) {}),
+          cubit.presentation.listen((_) {}),
+          cubit.presentation.listen((_) {}),
+        ];
+
+        for (final subscription in subs) {
+          subscription.cancel();
+        }
+      });
     });
 
     group('AsyncCounterCubit', () {
