@@ -1,4 +1,4 @@
-# 1.1.0
+# 1.0.1
 
 - Make `MockPresentationCubit` and `MockPresentationBloc` presentation streams broadcast ones.
 
