@@ -24,7 +24,7 @@ class _MockPresentationBlocBase<S, P> extends Mock
     when(close).thenAnswer((_) => _presentationController.close());
   }
 
-  final _presentationController = StreamController<P>();
+  final _presentationController = StreamController<P>.broadcast();
 
   /// Adds given [event] to bloc's presentation stream.
   void emitMockPresentation(P event) {

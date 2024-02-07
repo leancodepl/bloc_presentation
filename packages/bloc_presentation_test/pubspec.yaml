@@ -1,11 +1,11 @@
 name: bloc_presentation_test
 description: A testing library for Blocs/Cubits which mixin BlocPresentationMixin. To be used with bloc_presentation package.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.10.0'
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
 
 dependencies:
   bloc: ^8.0.0
@@ -19,4 +19,4 @@ dependencies:
 
 dev_dependencies:
   equatable: ^2.0.5
-  leancode_lint: '>=5.0.0'
+  leancode_lint: ">=5.0.0"
