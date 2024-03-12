@@ -13,7 +13,7 @@ StreamController<T> whenListenPresentation<T>(
   BlocPresentationMixin<dynamic, T> bloc, {
   List<T>? initialEvents,
 }) {
-  final presentationController = StreamController<T>();
+  final presentationController = StreamController<T>.broadcast();
 
   initialEvents?.forEach(presentationController.add);
 
