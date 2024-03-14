@@ -1,3 +1,7 @@
+# 1.0.2
+
+- Make `StreamController` a broadcast one in `whenListenPresentation`.
+
 # 1.0.1
 
 - Make `MockPresentationCubit` and `MockPresentationBloc` presentation streams broadcast ones.
