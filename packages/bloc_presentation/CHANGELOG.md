@@ -1,3 +1,7 @@
+# 1.0.1
+
+- Removed dependency on `provider`.
+
 # 1.0.0
 
 - **BREAKING**: Removed `useBlocPresentationListener` hook. Use `useOnStreamChanged` from `flutter_hooks` instead.
