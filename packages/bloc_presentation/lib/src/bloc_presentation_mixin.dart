@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// [BlocPresentationMixin] adds a presentation stream to a [BlocBase]
+/// [BlocPresentationMixin] adds a presentation stream to a [EmittableStateStreamableSource]
 /// which is automatically disposed.
-mixin BlocPresentationMixin<S, P> on BlocBase<S> {
+mixin BlocPresentationMixin<S, P> on EmittableStateStreamableSource<S> {
   final _presentationStream = StreamController<P>.broadcast();
 
   /// Stream emitting non-unique presentation events.
