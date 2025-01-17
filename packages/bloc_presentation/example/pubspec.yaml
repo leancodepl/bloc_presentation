@@ -12,10 +12,10 @@ dependencies:
     path: ..
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.0.0
+  flutter_bloc: ^9.0.0
 
 dev_dependencies:
-  bloc_test: ^9.1.2
+  bloc_test: ^10.0.0
   flutter_test:
     sdk: flutter
   leancode_lint: ">=5.0.0 <7.0.0"
