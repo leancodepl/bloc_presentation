@@ -126,7 +126,15 @@ class _BlocPresentationListenerBaseState<
 
   void _subscribe() {
     _streamSubscription = _bloc.presentation.listen(
-      (event) => widget.listener(context, event),
+      (event) {
+        if (!mounted) {
+          // This is to satisfy use_build_context_synchronously lint. We
+          // unsubscribe on dispose so the context should always be mounted here.
+          return;
+        }
+
+        widget.listener(context, event);
+      },
     );
   }
 
