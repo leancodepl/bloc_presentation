@@ -70,7 +70,6 @@ Future<void>
       final bloc = build();
 
       if (seed != null) {
-        // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
         bloc.emit(seed());
       }
 
@@ -99,7 +98,6 @@ Future<void>
         final diff = _diff(expected: expected, actual: events);
         final message = '${e.message}\n$diff';
 
-        // ignore: only_throw_errors
         throw TestFailure(message);
       }
 
@@ -108,7 +106,6 @@ Future<void>
     });
   } catch (e) {
     if (shallowEquality && e is TestFailure) {
-      // ignore: only_throw_errors
       throw TestFailure(
         '''
 ${e.message}

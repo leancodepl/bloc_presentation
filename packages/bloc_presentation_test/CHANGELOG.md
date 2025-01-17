@@ -1,3 +1,8 @@
+# 1.1.0
+
+- Bump dependency on `bloc` to `9.0.0`.
+- Bump dependency on `bloc_presentation` to `1.1.0`.
+
 # 1.0.2
 
 - Make `StreamController` a broadcast one in `whenListenPresentation`.

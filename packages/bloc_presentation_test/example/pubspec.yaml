@@ -8,11 +8,11 @@ environment:
   flutter: '>=3.10.0'
 
 dependencies:
-  bloc: ^8.0.0
-  bloc_presentation: ^1.0.0
+  bloc: ^9.0.0
+  bloc_presentation: ^1.1.0
   bloc_presentation_test:
     path: ..
-  bloc_test: ^9.1.2
+  bloc_test: ^10.0.0
   flutter:
     sdk: flutter
   test: ^1.24.3
