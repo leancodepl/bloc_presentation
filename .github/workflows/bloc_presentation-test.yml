@@ -15,13 +15,17 @@ on:
 
 jobs:
   test:
-    name: Flutter ${{ matrix.version }}
+    name: Flutter ${{ matrix.flutter.version }}
 
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        version: ['3.10.x', '3.13.x', '3.27.x']
+        flutter:
+          - version: '3.10.x'
+          - version: '3.13.x'
+          - version: '3.27.x'
+            analyze: true
 
     defaults:
       run:
@@ -34,7 +38,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ matrix.version }}
+          flutter-version: ${{ matrix.flutter.version }}
           cache: true
 
       - name: Download pub dependencies
@@ -44,6 +48,7 @@ jobs:
         run: dart format --set-exit-if-changed --output none .
 
       - name: Run analyzer
+        if: ${{ matrix.flutter.analyze }}
         run: flutter analyze --fatal-warnings --fatal-infos
 
       - name: Run tests
