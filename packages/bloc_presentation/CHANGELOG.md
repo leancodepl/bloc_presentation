@@ -1,3 +1,7 @@
+# 1.1.0
+
+- Bump dependency on `flutter_bloc` to `9.0.0`. (#37, thanks @bobekos)
+
 # 1.0.1
 
 - Removed dependency on `provider`.
