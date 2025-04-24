@@ -1,3 +1,7 @@
+# 1.2.0
+
+- Add `verify` parameter to `blocPresentationTest` (thanks @sanna-marco!)
+
 # 1.1.0
 
 - Bump dependency on `bloc` to `9.0.0`.

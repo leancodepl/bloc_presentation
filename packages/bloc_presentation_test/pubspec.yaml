@@ -1,6 +1,6 @@
 name: bloc_presentation_test
 description: A testing library for Blocs/Cubits which mixin BlocPresentationMixin. To be used with bloc_presentation package.
-version: 1.1.0
+version: 1.2.0
 homepage: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
 
 environment:
