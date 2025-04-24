@@ -27,26 +27,31 @@ void blocPresentationTest<B extends BlocPresentationMixin<State, P>, State, P>(
   FutureOr<void> Function()? tearDown,
   dynamic tags,
 }) {
-  test(description, () async {
-    await testBlocPresentation<B, State, P>(
-      setUp: setUp,
-      build: build,
-      seed: seed,
-      act: act,
-      wait: wait,
-      skipPresentation: skipPresentation,
-      expectPresentation: expectPresentation,
-      verify: verify,
-      tearDown: tearDown,
-    );
-  }, tags: tags);
+  test(
+    description,
+    () async {
+      await testBlocPresentation<B, State, P>(
+        setUp: setUp,
+        build: build,
+        seed: seed,
+        act: act,
+        wait: wait,
+        skipPresentation: skipPresentation,
+        expectPresentation: expectPresentation,
+        verify: verify,
+        tearDown: tearDown,
+      );
+    },
+    tags: tags,
+  );
 }
 
 /// Internal [blocPresentationTest] runner which is only visible for testing.
 /// This should never be used directly -- please use [blocPresentationTest]
 /// instead.
 @visibleForTesting
-Future<void> testBlocPresentation<B extends BlocPresentationMixin<State, P>, State, P>({
+Future<void>
+    testBlocPresentation<B extends BlocPresentationMixin<State, P>, State, P>({
   FutureOr<void> Function()? setUp,
   required B Function() build,
   State Function()? seed,
@@ -71,7 +76,8 @@ Future<void> testBlocPresentation<B extends BlocPresentationMixin<State, P>, Sta
         bloc.emit(seed());
       }
 
-      final subscription = bloc.presentation.skip(skipPresentation).listen(events.add);
+      final subscription =
+          bloc.presentation.skip(skipPresentation).listen(events.add);
 
       await act?.call(bloc);
 
