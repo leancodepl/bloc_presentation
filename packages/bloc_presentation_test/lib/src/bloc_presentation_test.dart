@@ -23,33 +23,30 @@ void blocPresentationTest<B extends BlocPresentationMixin<State, P>, State, P>(
   Duration? wait,
   int skipPresentation = 0,
   required dynamic Function() expectPresentation,
+  FutureOr<void> Function(B bloc)? verify,
   FutureOr<void> Function()? tearDown,
   dynamic tags,
 }) {
-  test(
-    description,
-    () async {
-      await testBlocPresentation<B, State, P>(
-        setUp: setUp,
-        build: build,
-        seed: seed,
-        act: act,
-        wait: wait,
-        skipPresentation: skipPresentation,
-        expectPresentation: expectPresentation,
-        tearDown: tearDown,
-      );
-    },
-    tags: tags,
-  );
+  test(description, () async {
+    await testBlocPresentation<B, State, P>(
+      setUp: setUp,
+      build: build,
+      seed: seed,
+      act: act,
+      wait: wait,
+      skipPresentation: skipPresentation,
+      expectPresentation: expectPresentation,
+      verify: verify,
+      tearDown: tearDown,
+    );
+  }, tags: tags);
 }
 
 /// Internal [blocPresentationTest] runner which is only visible for testing.
 /// This should never be used directly -- please use [blocPresentationTest]
 /// instead.
 @visibleForTesting
-Future<void>
-    testBlocPresentation<B extends BlocPresentationMixin<State, P>, State, P>({
+Future<void> testBlocPresentation<B extends BlocPresentationMixin<State, P>, State, P>({
   FutureOr<void> Function()? setUp,
   required B Function() build,
   State Function()? seed,
@@ -57,6 +54,7 @@ Future<void>
   Duration? wait,
   int skipPresentation = 0,
   required dynamic Function() expectPresentation,
+  FutureOr<void> Function(B bloc)? verify,
   FutureOr<void> Function()? tearDown,
   dynamic tags,
 }) async {
@@ -73,8 +71,7 @@ Future<void>
         bloc.emit(seed());
       }
 
-      final subscription =
-          bloc.presentation.skip(skipPresentation).listen(events.add);
+      final subscription = bloc.presentation.skip(skipPresentation).listen(events.add);
 
       await act?.call(bloc);
 
@@ -102,6 +99,7 @@ Future<void>
       }
 
       await subscription.cancel();
+      await verify?.call(bloc);
       await tearDown?.call();
     });
   } catch (e) {
@@ -122,17 +120,20 @@ Alternatively, consider using Matchers in the expectPresentation of the blocPres
 Future<void> _runZonedGuarded(Future<void> Function() body) {
   final completer = Completer<void>();
 
-  runZonedGuarded(() async {
-    await body();
+  runZonedGuarded(
+    () async {
+      await body();
 
-    if (!completer.isCompleted) {
-      completer.complete();
-    }
-  }, (e, st) {
-    if (!completer.isCompleted) {
-      completer.completeError(e, st);
-    }
-  });
+      if (!completer.isCompleted) {
+        completer.complete();
+      }
+    },
+    (e, st) {
+      if (!completer.isCompleted) {
+        completer.completeError(e, st);
+      }
+    },
+  );
 
   return completer.future;
 }
