@@ -104,6 +104,22 @@ void main() {
         expect(actualError, exception);
       });
 
+      test('calls verify once after the test', () async {
+        var verifyCalls = 0;
+
+        await testBlocPresentation<AsyncCounterCubit, int,
+            CounterPresentationEvent>(
+          build: AsyncCounterCubit.new,
+          expectPresentation: () => const <CounterPresentationEvent>[],
+          verify: (bloc) {
+            expect(bloc.isClosed, true);
+            verifyCalls++;
+          },
+        );
+
+        expect(verifyCalls, 1);
+      });
+
       test('calls tearDown once after the test', () async {
         var tearDownCalls = 0;
 

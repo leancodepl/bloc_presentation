@@ -23,6 +23,7 @@ void blocPresentationTest<B extends BlocPresentationMixin<State, P>, State, P>(
   Duration? wait,
   int skipPresentation = 0,
   required dynamic Function() expectPresentation,
+  FutureOr<void> Function(B bloc)? verify,
   FutureOr<void> Function()? tearDown,
   dynamic tags,
 }) {
@@ -37,6 +38,7 @@ void blocPresentationTest<B extends BlocPresentationMixin<State, P>, State, P>(
         wait: wait,
         skipPresentation: skipPresentation,
         expectPresentation: expectPresentation,
+        verify: verify,
         tearDown: tearDown,
       );
     },
@@ -57,6 +59,7 @@ Future<void>
   Duration? wait,
   int skipPresentation = 0,
   required dynamic Function() expectPresentation,
+  FutureOr<void> Function(B bloc)? verify,
   FutureOr<void> Function()? tearDown,
   dynamic tags,
 }) async {
@@ -102,6 +105,7 @@ Future<void>
       }
 
       await subscription.cancel();
+      await verify?.call(bloc);
       await tearDown?.call();
     });
   } catch (e) {
@@ -122,17 +126,20 @@ Alternatively, consider using Matchers in the expectPresentation of the blocPres
 Future<void> _runZonedGuarded(Future<void> Function() body) {
   final completer = Completer<void>();
 
-  runZonedGuarded(() async {
-    await body();
+  runZonedGuarded(
+    () async {
+      await body();
 
-    if (!completer.isCompleted) {
-      completer.complete();
-    }
-  }, (e, st) {
-    if (!completer.isCompleted) {
-      completer.completeError(e, st);
-    }
-  });
+      if (!completer.isCompleted) {
+        completer.complete();
+      }
+    },
+    (e, st) {
+      if (!completer.isCompleted) {
+        completer.completeError(e, st);
+      }
+    },
+  );
 
   return completer.future;
 }
