@@ -1,3 +1,7 @@
+# 1.1.1
+
+- Fix listeners not being registered when cubit instance passed by context changes. [#42](https://github.com/leancodepl/bloc_presentation/issues/42)
+
 # 1.1.0
 
 - Bump dependency on `flutter_bloc` to `9.0.0`. (#37, thanks @bobekos)
