@@ -154,5 +154,36 @@ void main() {
       verifyNever(() => listener(any(), event));
       verify(() => listener2(any(), event)).called(1);
     });
+
+    testWidgets('listens to events if bloc instance changed', (tester) async {
+      final cubit1 = _TestCubit();
+      final cubit2 = _TestCubit();
+
+      await tester.pumpWidget(
+        BlocProvider<_TestCubit>.value(
+          value: cubit1,
+          child: BlocPresentationListener<_TestCubit, _PresentationEvent>(
+            listener: listener,
+            child: const SizedBox(),
+          ),
+        ),
+      );
+
+      // Pass new instance of the cubit
+      await tester.pumpWidget(
+        BlocProvider<_TestCubit>.value(
+          value: cubit2,
+          child: BlocPresentationListener<_TestCubit, _PresentationEvent>(
+            listener: listener,
+            child: const SizedBox(),
+          ),
+        ),
+      );
+
+      cubit2.emitEvent(event);
+      await tester.pump();
+
+      verify(() => listener(any(), event)).called(1);
+    });
   });
 }

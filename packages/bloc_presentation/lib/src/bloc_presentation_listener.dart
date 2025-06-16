@@ -114,6 +114,11 @@ class _BlocPresentationListenerBaseState<
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
+    if (widget.bloc == null) {
+      // Trigger a rebuild if the bloc reference has changed.
+      // See https://github.com/leancodepl/bloc_presentation/issues/42.
+      context.select<B, bool>((bloc) => identical(_bloc, bloc));
+    }
     return child ?? const SizedBox();
   }
 
