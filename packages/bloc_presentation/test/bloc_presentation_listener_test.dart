@@ -16,10 +16,7 @@ class _TestCubit extends Cubit<int>
 class _PresentationEvent {}
 
 class _MockListener extends Mock {
-  void call(
-    BuildContext context,
-    _PresentationEvent event,
-  );
+  void call(BuildContext context, _PresentationEvent event);
 }
 
 void main() {
@@ -185,5 +182,22 @@ void main() {
 
       verify(() => listener(any(), event)).called(1);
     });
+
+    testWidgets(
+      'does nothing when no bloc in context and type parameter is nullable',
+      (tester) async {
+        await tester.pumpWidget(
+          BlocPresentationListener<_TestCubit?, _PresentationEvent>(
+            // bloc not provided and no provider in the tree
+            listener: listener,
+            child: const SizedBox(),
+          ),
+        );
+
+        await tester.pump();
+
+        verifyNever(() => listener(any(), any()));
+      },
+    );
   });
 }

@@ -73,7 +73,15 @@ BlocPresentationListener<CommentCubit, CommentCubitEvent>(
 By default, `CommentCubit` will be looked up using `package:provider` in the
 widget tree. However, a bloc can be provided directly using the
 `BlocPresentationListener.bloc` parameter (analogous to how `package:bloc`
-listeners work).
+listeners work). If you want the listener to be a no-op when the cubit isn't
+available in the widget tree, you can declare a nullable type parameter:
+
+```dart
+BlocPresentationListener<CommentCubit?, CommentCubitEvent>(
+  listener: (context, event) { /* ... */ },
+  child: MyWidget(),
+)
+```
 
 ### Example
 
@@ -93,7 +101,7 @@ You can listen to its events via the `useOnStreamChange` hook:
 
 ```dart
 useOnStreamChange(
-  bloc.presentation, 
+  bloc.presentation,
   (event) {
     // Implement your listener here
   },
