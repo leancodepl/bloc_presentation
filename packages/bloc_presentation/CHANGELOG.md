@@ -1,6 +1,6 @@
 # 1.1.2
 
-- Allow BlocPresentationListener type parameter to be nullable, allowing cubit not to be in the context [#44](https://github.com/leancodepl/bloc_presentation/issues/44)
+- Make the BlocPresentationListener's type parameter nullable, allowing it to be used without a Bloc in context. [#44](https://github.com/leancodepl/bloc_presentation/issues/44)
 
 # 1.1.1
 
