@@ -16,7 +16,10 @@ class _TestCubit extends Cubit<int>
 class _PresentationEvent {}
 
 class _MockListener extends Mock {
-  void call(BuildContext context, _PresentationEvent event);
+  void call(
+    BuildContext context,
+    _PresentationEvent event,
+  );
 }
 
 void main() {
@@ -193,6 +196,8 @@ void main() {
             child: const SizedBox(),
           ),
         );
+
+        cubit.emitEvent(event);
 
         await tester.pump();
 

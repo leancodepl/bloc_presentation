@@ -10,7 +10,9 @@ import 'bloc_presentation_mixin.dart';
 /// with the `event` and is responsible for executing in response to
 /// new events.
 typedef BlocPresentationWidgetListener<P> = void Function(
-    BuildContext context, P event);
+  BuildContext context,
+  P event,
+);
 
 /// A widget that listens to events from a bloc or cubit and invokes a listener
 /// function in response to new events.
