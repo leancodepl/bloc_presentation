@@ -32,7 +32,7 @@ typedef BlocPresentationWidgetListener<P> = void Function(
 ///   child: SomeWidget(),
 /// )
 /// ```
-class BlocPresentationListener<B extends BlocPresentationMixin<dynamic, P>, P>
+class BlocPresentationListener<B extends BlocPresentationMixin<dynamic, P>?, P>
     extends SingleChildStatefulWidget {
   /// Creates a [BlocPresentationListener].
   ///
@@ -65,10 +65,10 @@ class BlocPresentationListener<B extends BlocPresentationMixin<dynamic, P>, P>
 }
 
 class _BlocPresentationListenerBaseState<
-    B extends BlocPresentationMixin<dynamic, P>,
+    B extends BlocPresentationMixin<dynamic, P>?,
     P> extends SingleChildState<BlocPresentationListener<B, P>> {
   StreamSubscription<P>? _streamSubscription;
-  late B _bloc;
+  late B? _bloc;
 
   @override
   void initState() {
@@ -89,8 +89,9 @@ class _BlocPresentationListenerBaseState<
     if (oldBloc != currentBloc) {
       if (_streamSubscription != null) {
         _unsubscribe();
-        _bloc = currentBloc;
       }
+
+      _bloc = currentBloc;
 
       _subscribe();
     }
@@ -105,8 +106,9 @@ class _BlocPresentationListenerBaseState<
     if (_bloc != bloc) {
       if (_streamSubscription != null) {
         _unsubscribe();
-        _bloc = bloc;
       }
+
+      _bloc = bloc;
 
       _subscribe();
     }
@@ -130,17 +132,19 @@ class _BlocPresentationListenerBaseState<
   }
 
   void _subscribe() {
-    _streamSubscription = _bloc.presentation.listen(
-      (event) {
-        if (!mounted) {
-          // This is to satisfy use_build_context_synchronously lint. We
-          // unsubscribe on dispose so the context should always be mounted here.
-          return;
-        }
+    if (_bloc == null) {
+      return;
+    }
 
-        widget.listener(context, event);
-      },
-    );
+    _streamSubscription = _bloc!.presentation.listen((event) {
+      if (!mounted) {
+        // This is to satisfy use_build_context_synchronously lint. We
+        // unsubscribe on dispose so the context should always be mounted here.
+        return;
+      }
+
+      widget.listener(context, event);
+    });
   }
 
   void _unsubscribe() {

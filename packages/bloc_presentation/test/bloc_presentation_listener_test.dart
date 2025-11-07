@@ -16,10 +16,7 @@ class _TestCubit extends Cubit<int>
 class _PresentationEvent {}
 
 class _MockListener extends Mock {
-  void call(
-    BuildContext context,
-    _PresentationEvent event,
-  );
+  void call(BuildContext context, _PresentationEvent event);
 }
 
 void main() {
@@ -185,5 +182,61 @@ void main() {
 
       verify(() => listener(any(), event)).called(1);
     });
+
+    testWidgets(
+      'does nothing when no bloc in context and type parameter is nullable',
+      (tester) async {
+        await tester.pumpWidget(
+          BlocPresentationListener<_TestCubit?, _PresentationEvent>(
+            // bloc not provided and no provider in the tree
+            listener: listener,
+            child: const SizedBox(),
+          ),
+        );
+
+        await tester.pump();
+
+        verifyNever(() => listener(any(), any()));
+      },
+    );
+
+    testWidgets(
+      'attaches when provider appears on second pump',
+      (tester) async {
+        final key = GlobalKey();
+        final cubitInContext = _TestCubit();
+
+        // First pump: no provider in the tree
+        await tester.pumpWidget(
+          BlocPresentationListener<_TestCubit?, _PresentationEvent>(
+            key: key,
+            listener: listener,
+            child: const SizedBox(),
+          ),
+        );
+
+        // Verify no calls when there is no provider
+        await tester.pump();
+        verifyNever(() => listener(any(), any()));
+
+        // Second pump: insert provider above the same keyed listener
+        await tester.pumpWidget(
+          BlocProvider<_TestCubit>.value(
+            value: cubitInContext,
+            child: BlocPresentationListener<_TestCubit?, _PresentationEvent>(
+              key: key,
+              listener: listener,
+              child: const SizedBox(),
+            ),
+          ),
+        );
+
+        cubitInContext.emitEvent(event);
+
+        await tester.pump();
+
+        verify(() => listener(any(), event)).called(1);
+      },
+    );
   });
 }
