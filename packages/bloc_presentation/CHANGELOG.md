@@ -1,3 +1,7 @@
+# 1.1.2
+
+- Allow BlocPresentationListener type parameter to be nullable, allowing cubit not to be in the context [#44](https://github.com/leancodepl/bloc_presentation/issues/44)
+
 # 1.1.1
 
 - Fix listeners not being registered when cubit instance passed by context changes. [#42](https://github.com/leancodepl/bloc_presentation/issues/42)
