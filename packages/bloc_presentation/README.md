@@ -1,3 +1,7 @@
+<a href="https://leancode.co/?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation" align="center">
+  <img alt="bloc_presentation" src="https://github.com/user-attachments/assets/f4446e85-7425-463e-b89c-e77a3fad4de8" />
+</a>
+
 # bloc_presentation
 
 [![pub.dev badge][pub-badge]][pub-badge-link]
