@@ -1,6 +1,7 @@
 <a href="https://leancode.co/?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation" align="center">
-  <img alt="bloc_presentation" src="https://github.com/user-attachments/assets/1d872549-f48e-4171-8fd7-f93c0d465cb6" />
+  <img alt="bloc_presentation" src="https://github.com/user-attachments/assets/12234fbc-cb0e-4a60-bf99-85b2c4c14499" />
 </a>
+
 
 
 # bloc_presentation
