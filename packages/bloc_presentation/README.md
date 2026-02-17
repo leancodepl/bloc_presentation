@@ -116,12 +116,6 @@ useOnStreamChange(
 
 In order to to make testing of this package more straightforward, please, check out the [bloc_presentation_test][bloc_presentation_test-link] package.
 
-[pub-badge]: https://img.shields.io/pub/v/bloc_presentation.svg?logo=dart
-[pub-badge-link]: https://pub.dev/packages/bloc_presentation
-[build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
-[build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation-test.yml
-[bloc_presentation_test-link]: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
-
 ---
 
 ## 🛠️ Maintained by LeanCode
@@ -152,3 +146,9 @@ We are **top-tier experts** focused on Flutter Enterprise solutions.
   [Check our other packages](https://pub.dev/packages?q=publisher%3Aleancode.co&sort=downloads)
 
 </div>
+
+[pub-badge]: https://img.shields.io/pub/v/bloc_presentation.svg?logo=dart
+[pub-badge-link]: https://pub.dev/packages/bloc_presentation
+[build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
+[build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation-test.yml
+[bloc_presentation_test-link]: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
