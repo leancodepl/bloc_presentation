@@ -2,8 +2,6 @@
   <img alt="bloc_presentation" src="https://github.com/user-attachments/assets/12234fbc-cb0e-4a60-bf99-85b2c4c14499" />
 </a>
 
-
-
 # bloc_presentation
 
 [![pub.dev badge][pub-badge]][pub-badge-link]
