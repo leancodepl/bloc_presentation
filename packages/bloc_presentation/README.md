@@ -121,3 +121,34 @@ In order to to make testing of this package more straightforward, please, check 
 [build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
 [build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation-test.yml
 [bloc_presentation_test-link]: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
+
+---
+
+## 🛠️ Maintained by LeanCode
+
+<div align="center">
+  <a href="https://leancode.co/?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation">
+    <img src="https://leancodepublic.blob.core.windows.net/public/wide.png" alt="LeanCode Logo" height="100" />
+  </a>
+</div>
+
+This package is built with 💙 by **[LeanCode](https://leancode.co?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation)**.
+We are **top-tier experts** focused on Flutter Enterprise solutions.
+
+### Why LeanCode?
+
+- **Creators of [Patrol](https://patrol.leancode.co/?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation)** – the next-gen testing framework for Flutter.
+
+- **Production-Ready** – We use this package in apps with millions of users.
+- **Full-Cycle Product Development** – We take your product from scratch to long-term maintenance.
+
+<div align="center">
+  <br />
+
+  **Need help with your Flutter project?**
+
+  [**👉 Hire our team**](https://leancode.co/get-estimate?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation)
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  [Check our other packages](https://pub.dev/packages?q=publisher%3Aleancode.co&sort=downloads)
+
+</div>
