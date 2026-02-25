@@ -153,7 +153,7 @@ We are **top-tier experts** focused on Flutter Enterprise solutions.
 [build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
 [build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation-test.yml
 [bloc_presentation_test-link]: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
-[banner-img]: https://raw.githubusercontent.com/leancodepl/bloc_presentation/refs/heads/master/packages/bloc_presentation/docs/imgs/banner.png 
+[banner-img]: https://raw.githubusercontent.com/leancodepl/bloc_presentation/refs/heads/master/packages/bloc_presentation/doc/imgs/banner.png 
 [leancode-landing]: https://leancode.co/?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation
 [leancode-estimate]: https://leancode.co/get-estimate?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation
 [leancode-packages]: https://pub.dev/packages?q=publisher%3Aleancode.co&sort=downloads
