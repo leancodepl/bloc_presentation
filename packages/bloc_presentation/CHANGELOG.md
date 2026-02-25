@@ -1,3 +1,6 @@
+# 1.1.2+1
+- Add banner to README
+
 # 1.1.2
 
 - Make the BlocPresentationListener's type parameter nullable, allowing it to be used without a Bloc in context. [#44](https://github.com/leancodepl/bloc_presentation/issues/44)
