@@ -1,3 +1,9 @@
+<div align="center">
+
+[![Banner][banner-img]][leancode-landing]
+
+</div>
+
 # bloc_presentation
 
 [![pub.dev badge][pub-badge]][pub-badge-link]
@@ -112,8 +118,43 @@ useOnStreamChange(
 
 In order to to make testing of this package more straightforward, please, check out the [bloc_presentation_test][bloc_presentation_test-link] package.
 
+---
+
+## 🛠️ Maintained by LeanCode
+<div align="center">
+
+  [<img src="https://leancodepublic.blob.core.windows.net/public/wide.png" alt="LeanCode Logo" height="100" />][leancode-landing]
+
+</div>
+
+This package is built with 💙 by **[LeanCode][leancode-landing]**.
+We are **top-tier experts** focused on Flutter Enterprise solutions.
+
+### Why LeanCode?
+
+- **Creators of [Patrol][patrol-landing]** – the next-gen testing framework for Flutter.
+
+- **Production-Ready** – We use this package in apps with millions of users.
+- **Full-Cycle Product Development** – We take your product from scratch to long-term maintenance.
+
+<div align="center">
+  <br />
+
+  **Need help with your Flutter project?**
+
+  [**👉 Hire our team**][leancode-estimate]
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  [Check our other packages][leancode-packages]
+
+</div>
+
 [pub-badge]: https://img.shields.io/pub/v/bloc_presentation.svg?logo=dart
 [pub-badge-link]: https://pub.dev/packages/bloc_presentation
 [build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
 [build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation-test.yml
 [bloc_presentation_test-link]: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
+[banner-img]: https://raw.githubusercontent.com/leancodepl/bloc_presentation/refs/heads/master/packages/bloc_presentation/doc/imgs/banner.png 
+[leancode-landing]: https://leancode.co/?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation
+[leancode-estimate]: https://leancode.co/get-estimate?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation
+[leancode-packages]: https://pub.dev/packages?q=publisher%3Aleancode.co&sort=downloads
+[patrol-landing]: https://patrol.leancode.co/?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation
