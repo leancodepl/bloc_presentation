@@ -3,8 +3,9 @@
 [![pub.dev badge][pub-badge]][pub-badge-link]
 [![Build status][build-badge]][build-badge-link]
 
-A package which makes testing `BlocPresentationMixin`ed `Bloc`s/`Cubit`s more straightforward.
-To be used with `bloc_presentation` package.
+Testing utilities for the `bloc_presentation` package — mock, stub, and verify single-time presentation events emitted from Blocs and Cubits using `BlocPresentationMixin`.
+
+Provides `MockPresentationCubit`, `MockPresentationBloc`, `whenListenPresentation`, and `emitMockPresentation` helpers so you can write widget tests and unit tests for side effects like navigation, snackbars, and dialogs.
 
 ## Installation
 
@@ -40,7 +41,7 @@ final controller = whenListenPresentation(mockCubit);
 It will stub `MockCommentCubit`'s `presentation` stream, so you are able to subscribe to this stream.
 Obtained controller can be used for adding events to `presentation` stream.
 
-The returned `StreamController` is disposed in `Cubit`'s/`Bloc`'s `close` method. 
+The returned `StreamController` is disposed in `Cubit`'s/`Bloc`'s `close` method.
 If you override the stub for this method then you need to dispose the controller manually.
 
 ```dart

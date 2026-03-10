@@ -1,7 +1,16 @@
 name: bloc_presentation_test
-description: A testing library for Blocs/Cubits which mixin BlocPresentationMixin. To be used with bloc_presentation package.
+description: >
+  Testing utilities for bloc_presentation — mock, stub, and verify single-time presentation events
+  emitted from Blocs and Cubits using BlocPresentationMixin. Provides MockPresentationCubit,
+  MockPresentationBloc, and whenListenPresentation helpers.
 version: 1.2.0
 homepage: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
+topics:
+  - bloc
+  - testing
+  - cubit
+  - state-management
+  - side-effects
 
 environment:
   sdk: ">=3.0.0 <4.0.0"

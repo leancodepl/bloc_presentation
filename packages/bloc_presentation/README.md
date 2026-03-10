@@ -9,8 +9,26 @@
 [![pub.dev badge][pub-badge]][pub-badge-link]
 [![Build status][build-badge]][build-badge-link]
 
-Extends blocs with an additional stream serving as a way of indicating
-single-time events (so-called "_presentation events_").
+A Flutter package for dispatching single-time side effects from Blocs and Cubits — perfect for navigation, snackbars, dialogs, and other one-shot presentation events that shouldn't live in your Bloc/Cubit state.
+
+Built on top of `flutter_bloc`, `bloc_presentation` provides a `BlocPresentationMixin` for emitting events and a `BlocPresentationListener` widget (plus a hooks API) for reacting to them in the UI. No more clearing "consumed" flags from state or losing events on rebuilds.
+
+## Features
+
+- **BlocPresentationMixin** — Add a secondary event stream to any Bloc or Cubit without touching its state
+- **BlocPresentationListener** — A widget that listens for one-time presentation events (similar to BlocListener but for side effects)
+- **flutter_hooks support** — Use `useOnStreamChange` with `bloc.presentation` for hook-based listeners
+- **Nullable type support** — Declare `BlocPresentationListener<MyCubit?, MyEvent>` for optional cubits
+- **Testable** — Companion package `bloc_presentation_test` provides mocks and stubs
+
+## When to use bloc_presentation
+
+Use presentation events instead of state when you need to:
+- Show a **SnackBar**, **toast**, or **dialog** after an action
+- Trigger **navigation** (push a route, pop, open a deep link)
+- Fire **analytics** events
+- Play a **sound** or **haptic** feedback
+- Any fire-and-forget side effect that isn't part of your UI state
 
 ## Installation
 
@@ -153,7 +171,7 @@ We are **top-tier experts** focused on Flutter Enterprise solutions.
 [build-badge]: https://img.shields.io/github/actions/workflow/status/leancodepl/bloc_presentation/bloc_presentation-test.yml?branch=master
 [build-badge-link]: https://github.com/leancodepl/bloc_presentation/actions/workflows/bloc_presentation-test.yml
 [bloc_presentation_test-link]: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation_test
-[banner-img]: https://raw.githubusercontent.com/leancodepl/bloc_presentation/refs/heads/master/packages/bloc_presentation/doc/imgs/banner.png 
+[banner-img]: https://raw.githubusercontent.com/leancodepl/bloc_presentation/refs/heads/master/packages/bloc_presentation/doc/imgs/banner.png
 [leancode-landing]: https://leancode.co/?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation
 [leancode-estimate]: https://leancode.co/get-estimate?utm_source=github.com&utm_medium=referral&utm_campaign=bloc-presentation
 [leancode-packages]: https://pub.dev/packages?q=publisher%3Aleancode.co&sort=downloads

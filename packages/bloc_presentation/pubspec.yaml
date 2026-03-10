@@ -1,9 +1,16 @@
 name: bloc_presentation
 description: >
-  Extends blocs with an additional stream which can serve as a way of indicating
-  single-time events (so-called "presentation events").
+  Primitives for dispatching single-time side effects (navigation, snackbars, dialogs) from Blocs and Cubits
+  without polluting state. Drop-in BlocPresentationMixin and BlocPresentationListener for one-shot
+  presentation events in Flutter.
 version: 1.1.2+1
 homepage: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation
+topics:
+  - bloc
+  - cubit
+  - state-management
+  - side-effects
+  - presentation
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
