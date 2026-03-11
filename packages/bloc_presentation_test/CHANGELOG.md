@@ -1,3 +1,7 @@
+# 1.2.0+1
+
+- Improve pubspec description, add topics, and restructure README
+
 # 1.2.0
 
 - Add `verify` parameter to `blocPresentationTest` (thanks @sanna-marco!)
