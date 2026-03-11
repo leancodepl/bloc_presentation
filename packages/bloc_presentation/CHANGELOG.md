@@ -1,3 +1,6 @@
+# 1.1.2+2
+- Improve pubspec description, add topics, and restructure README
+
 # 1.1.2+1
 - Add banner to README
 
