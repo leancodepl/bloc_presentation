@@ -1,3 +1,6 @@
+# 1.1.2+3
+- Fix pubspec description length due to Pub score penalty
+
 # 1.1.2+2
 - Improve pubspec description, add topics, and restructure README
 
