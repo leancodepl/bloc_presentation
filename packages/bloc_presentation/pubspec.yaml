@@ -1,16 +1,14 @@
 name: bloc_presentation
 description: >
-  Primitives for dispatching single-time side effects (navigation, snackbars, dialogs) from Blocs and Cubits
-  without polluting state. Drop-in BlocPresentationMixin and BlocPresentationListener for one-shot
-  presentation events in Flutter.
-version: 1.1.2+2
+  Dispatch single-time side effects (navigation / snackbar / dialog) from Bloc or Cubit without polluting state.
+version: 1.1.2+3
 homepage: https://github.com/leancodepl/bloc_presentation/tree/master/packages/bloc_presentation
 topics:
   - bloc
   - cubit
-  - state-management
+  - architecture
   - side-effects
-  - presentation
+  - navigation
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
